@@ -1,17 +1,24 @@
 // client/src/App.js
 
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from "./Login";
+
+
 
 function App() {
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/RegisterPage" element={<RegisterPage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/shop" element={<Shop />} /> */}
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 
