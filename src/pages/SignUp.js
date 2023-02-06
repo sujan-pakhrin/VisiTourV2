@@ -2,9 +2,10 @@ import React from 'react'
 import { useState } from "react";
 import Axios from "axios";
 import FormInput from "../components/FormInput";
-
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
+    const navigate = useNavigate();
     const [values, setValues] = useState({
         username: "",
         email: "",
@@ -16,10 +17,12 @@ function SignUp() {
     });
 
     const register = () => {
-        Axios.post("http://localhost:5000/api/test", values
+        Axios.post("http://localhost:5000/api/signup", values
         ).then((res) => {
-            // if(res.sucess){
-            // }
+            var result = res.data
+            if(result.success){
+                navigate('/home');
+            }
         })
     }
 
