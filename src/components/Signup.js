@@ -1,14 +1,11 @@
 import React from 'react'
+
 import { useState } from "react";
-// import { redirect } from "react-router-dom";
 import "./App.css";
 import Axios from "axios";
-import FormInput from "./components/FormInput";
-import { useNavigate } from "react-router-dom";
-// import home from "./home";
+import FormInput from "./FormInput";
 
-const App = () => {
-  const navigate = useNavigate();
+const Signup = () => {
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -19,20 +16,16 @@ const App = () => {
     phone: ""
   });
 
-  // var data={    
-  //   username: setValues.username,
-  //   email: setValues.email,
-  //   password: setValues.password,
-  //   dob: setValues.dob,
-  //   address: setValues.address,
-  //   phone: setValues.phone
-  // }
   const register =() =>{
-    Axios.post("http://localhost:5000/api/signup",values
-    ).then((res)=>{
-      if(res.sucess){
-        navigate("/home");
-      }
+    Axios.post("http://localhost:5000/api/signup",{
+      username: setValues.username,
+      email: setValues.email,
+      password: setValues.password,
+      dob: setValues.dob,
+      address: setValues.address,
+      phone: setValues.phone
+    }).then((res)=>{
+      console.log(res);
     })
   }
 
@@ -94,16 +87,6 @@ const App = () => {
         "Add an address to your account",
       label: "Address",
       required: true,
-    },
-    {
-      id: 7,
-      name: "phone",
-      type: "text",
-      placeholder: "Phone Number",
-      errorMessage:
-        "Add an address to your account",
-      label: "Address",
-      required: true,
     }
   ];
 
@@ -132,4 +115,7 @@ const App = () => {
     </div>
   );
 };
-export default App
+
+
+
+export default Signup
