@@ -116,8 +116,28 @@ app.post("/api/test", (req, res) => {
   res.send({ success : 1, statusCode:200, message : "Sign Up Sucesfully"})
 });
 
+
+
 app.post("/api/staff", (req, res) => {
   db.query("SELECT * FROM user WHERE IsStaff", (err, result) => {
+    if (err) {
+      console.log(err)
+    }
+    res.send(result)
+  });
+});
+
+app.post("/api/package", (req, res) => {
+  db.query("SELECT * FROM package", (err, result) => {
+    if (err) {
+      console.log(err)
+    }
+    res.send(result)
+  });
+});
+
+app.post("/api/agency", (req, res) => {
+  db.query("SELECT * FROM agency", (err, result) => {
     if (err) {
       console.log(err)
     }

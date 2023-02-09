@@ -3,10 +3,12 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
-<<<<<<< HEAD
+import Staff from "./AdminDashboard/Staff";
+import Package from "./AdminDashboard/Package";
+import Agency from "./AdminDashboard/Agency";
+
 import Login from "./pages/LogIn";
-=======
->>>>>>> e4e6a4f8e5daf3583702de1ef3ceca1a8b330b27
+
 import Layout from "./pages/Layout";
 
 const App = () => {
@@ -17,10 +19,10 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route path= "home" index element={<Home />} />
           <Route path="signup" element={<SignUp />} />
-<<<<<<< HEAD
+          <Route path="staff" element={<Staff />} />
+          <Route path="package" element={<Package />} />
           <Route path="signin" element={<Login />} />
-=======
->>>>>>> e4e6a4f8e5daf3583702de1ef3ceca1a8b330b27
+          <Route path="agency" element={<Agency />} />
         </Route>
       </Routes>
     </BrowserRouter>
