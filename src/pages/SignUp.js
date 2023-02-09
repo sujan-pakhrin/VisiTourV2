@@ -6,7 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
     const navigate = useNavigate();
+<<<<<<< HEAD
     const [signupStatus,setsignupStatus]=useState('');
+=======
+>>>>>>> e4e6a4f8e5daf3583702de1ef3ceca1a8b330b27
     const [values, setValues] = useState({
         username: "",
         email: "",
@@ -21,11 +24,16 @@ function SignUp() {
         Axios.post("http://localhost:5000/api/signup", values
         ).then((res) => {
             var result = res.data
+<<<<<<< HEAD
             if (result.success) {
                 // console.log(result.sucess)
                 navigate('/home');
             }else{
                 setsignupStatus(result.message)
+=======
+            if(result.success){
+                navigate('/home');
+>>>>>>> e4e6a4f8e5daf3583702de1ef3ceca1a8b330b27
             }
         })
     }
@@ -122,7 +130,10 @@ function SignUp() {
                     />
                 ))}
                 <button onClick={register}>Submit</button>
+<<<<<<< HEAD
                 <h4>{signupStatus}</h4>
+=======
+>>>>>>> e4e6a4f8e5daf3583702de1ef3ceca1a8b330b27
             </form>
         </div>
     )
