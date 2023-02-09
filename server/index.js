@@ -34,22 +34,32 @@ app.post("/api/signin1", (req, res) => {
   var sql = 'SELECT * FROM user WHERE UserEmail = ' + mysql.escape(email);;
   db.query(sql, (err, result) => {
     if (err) {
-      console.log(err)
+      res.send({success:0,statusCode:500,message:"SELECT * FROM user WHERE UserEmail Query Failed", error:err})
+      // console.log(err)
     }
     else if (result.length <= 0) {
-      res.send("Wrong email");
+      // res.send("Wrong email");
+      res.send({ success : 0, statusCode:200, message : "You Entered Email is not a valid email"})
+
     } else {
       sql = 'SELECT UserPassword FROM user WHERE UserEmail = ' + mysql.escape(email);
       db.query(sql, (err, result) => {
-        if (err) console.log(err)
+        if (err) 
+        // console.log(err)
+        res.send({success:0,statusCode:500,message:"SELECT UserPassword FROM user WHERE UserEmail Query Failed", error:err})
+
         else {
           // res.send(result[0].UserPassword)
           bcrypt.compare(password, result[0].UserPassword, function (err, re) {
             if (re) {
-              res.send("Loged In");
+              // res.send("Loged In");
+              res.send({ success : 1, statusCode:200, message : "Sign In Sucesfully"})
+
             }
             else {
-              res.send("Wrong password");
+              // res.send("Wrong password");
+              res.send({ success : 0, statusCode:200, message : "You Entered The Wrong Password"})
+
             }
           });
         }
@@ -70,7 +80,7 @@ app.post("/api/signup", async (req, res) => {
   var sql = 'SELECT * FROM user WHERE UserEmail = ' + mysql.escape(email);
   db.query(sql, (err, result) => {
     if (err) 
-      res.send({sucess:0,statusCode:500,message:"SELECT * FROM user WHERE UserEmail Query Failed", error:err})
+      res.send({success:0,statusCode:500,message:"SELECT * FROM user WHERE UserEmail Query Failed", error:err})
     else if (result.length > 0) {
       res.send({ success : 0, statusCode:200, message : "Email already exists"})
     }
@@ -78,7 +88,7 @@ app.post("/api/signup", async (req, res) => {
       var sql = 'SELECT * FROM user WHERE UserPhone = ' + mysql.escape(userPhone);
       db.query(sql, (err, result) => {
         if (err) 
-        res.send({sucess:0,statusCode:500,message:"SELECT * FROM user WHERE UserPhone Query Failed", error:err})
+        res.send({success:0,statusCode:500,message:"SELECT * FROM user WHERE UserPhone Query Failed", error:err})
 
         else if (result.length > 0) {
           res.send({ success : 0, statusCode:200, message : "Phone Number already exists"})
@@ -89,7 +99,7 @@ app.post("/api/signup", async (req, res) => {
             var values = [username, email, hash, userDOB, userAddress, userPhone];
             db.query(sql, [values], (err, result) => {
               if (err) 
-              res.send({sucess:0,statusCode:500,message:"INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone) Query Failed", error:err})
+              res.send({success:0,statusCode:500,message:"INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone) Query Failed", error:err})
               else {
                 res.send({ success : 1, statusCode:200, message : "Sign Up Sucesfully"})
                 // res.send(result)
@@ -103,7 +113,7 @@ app.post("/api/signup", async (req, res) => {
 });
 
 app.post("/api/test", (req, res) => {
-  res.send(req.body)
+  res.send({ success : 1, statusCode:200, message : "Sign Up Sucesfully"})
 });
 
 
