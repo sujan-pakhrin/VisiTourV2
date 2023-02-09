@@ -1,0 +1,96 @@
+
+
+:root{
+    --blue: rgb(8, 23, 230);
+    --green: rgb(10, 170, 31);
+    --white: rgb(255, 255, 255);
+}
+
+
+h4{
+    display: flex;
+    justify-content: center;
+}
+.container{
+    margin-top: 20px;
+    background-color: rgb(233, 232, 231);
+    padding-left: 0;
+    border-radius: 10px;
+    padding-right: 20px;
+    width: 50vh;
+    box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.2);
+}
+.Email{
+    padding-top: 20px;
+}
+
+.Email,
+.Password,
+.LogIn,
+.Forget,
+.Create{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.Create-text{
+    color: var(--green);
+    margin-bottom: 0px;
+}
+
+.LogIn button{
+    padding: 10px 100px 10px 100px;
+    color: var(--blue);
+    border-color: var(--blue);
+    border-radius: 10px; 
+    
+}
+
+.LogIn button:hover{
+    color: var(--white);
+    background-color: var(--blue);
+    border-color: var(--blue);    
+}
+
+.LogIn button:active{
+    color: var(--white);
+    background-color: rgba(8, 23, 230,0.5);
+    border-color: rgba(8, 23, 230,0.5);    
+}
+
+.Create button{
+    padding: 10px 20px 10px 20px;
+    color: var(--green);
+    border-color: var(--green);
+    border-radius: 10px;       
+}
+
+.Create button:hover{
+    color: var(--white);
+    background-color: var(--green);
+    border-color: var(--green);    
+}
+
+.Create button:active{
+    color: var(--white);
+    background-color: rgba(10, 170, 31,0.5);
+    border-color: rgba(10, 170, 31,0.5);    
+}
+
+.email-input,
+.password-input{
+    border-radius: 10px;
+    padding: 8px;
+    border-style: solid; 
+}
+button{
+    border: 2;
+    border-style: solid;
+}
+i{
+    font-size: large;
+}
+
+
+

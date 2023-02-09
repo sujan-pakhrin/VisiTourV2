@@ -34,22 +34,32 @@ app.post("/api/signin1", (req, res) => {
   var sql = 'SELECT * FROM user WHERE UserEmail = ' + mysql.escape(email);;
   db.query(sql, (err, result) => {
     if (err) {
-      console.log(err)
+      res.send({success:0,statusCode:500,message:"SELECT * FROM user WHERE UserEmail Query Failed", error:err})
+      // console.log(err)
     }
     else if (result.length <= 0) {
-      res.send("Wrong email");
+      // res.send("Wrong email");
+      res.send({ success : 0, statusCode:200, message : "You Entered Email is not a valid email"})
+
     } else {
       sql = 'SELECT UserPassword FROM user WHERE UserEmail = ' + mysql.escape(email);
       db.query(sql, (err, result) => {
-        if (err) console.log(err)
+        if (err) 
+        // console.log(err)
+        res.send({success:0,statusCode:500,message:"SELECT UserPassword FROM user WHERE UserEmail Query Failed", error:err})
+
         else {
           // res.send(result[0].UserPassword)
           bcrypt.compare(password, result[0].UserPassword, function (err, re) {
             if (re) {
-              res.send("Loged In");
+              // res.send("Loged In");
+              res.send({ success : 1, statusCode:200, message : "Sign In Sucesfully"})
+
             }
             else {
-              res.send("Wrong password");
+              // res.send("Wrong password");
+              res.send({ success : 0, statusCode:200, message : "You Entered The Wrong Password"})
+
             }
           });
         }
