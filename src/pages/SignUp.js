@@ -7,7 +7,9 @@ import { useNavigate } from 'react-router-dom';
 function SignUp() {
     const navigate = useNavigate();
 
-    const [signupStatus, setsignupStatus] = useState('');
+
+    const [signupStatus,setsignupStatus]=useState('');
+
 
     const [values, setValues] = useState({
         username: "",
@@ -131,6 +133,11 @@ function SignUp() {
                     />
                 ))}
                 <button onClick={register}>Submit</button>
+
+
+                <h4>{signupStatus}</h4>
+
+
             </form>
             <span>{signupStatus}</span>
         </div>

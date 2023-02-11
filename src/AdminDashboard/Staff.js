@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
 import './All.css';
-import moment from 'moment';
+// import moment from 'moment';
 
 const Staff = () => {
     const [staffDetails, setStaffDetails] = useState([]);
@@ -41,7 +41,7 @@ const Staff = () => {
                             <td>{post.UserEmail}</td>
                             {/* <td>{post.UserPassword}</td> */}
                             <td>{post.UserName}</td>
-                            <td>{moment(post.UserDOB).utc().format('YYYY-MM-DD')}</td>
+                            {/* <td>{moment(post.UserDOB).utc().format('YYYY-MM-DD')}</td> */}
                         </tr>
                         // <li key={post.id}>{post.UserName}</li>
                     ))
