@@ -1,10 +1,13 @@
 // import { use } from 'bcrypt/promises';
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
+import './All.css';
+import moment from 'moment';
 
 const Staff = () => {
     const [staffDetails, setStaffDetails] = useState([]);
 
+    
 
     useEffect(() => {
         Axios.post("http://localhost:5000/api/staff",
@@ -16,6 +19,9 @@ const Staff = () => {
                 console.log(err);
             })
     }, [])
+
+   
+    
 
     return (
         <div>
@@ -35,7 +41,7 @@ const Staff = () => {
                             <td>{post.UserEmail}</td>
                             {/* <td>{post.UserPassword}</td> */}
                             <td>{post.UserName}</td>
-                            <td>{post.UserDOB}</td>
+                            <td>{moment(post.UserDOB).utc().format('YYYY-MM-DD')}</td>
                         </tr>
                         // <li key={post.id}>{post.UserName}</li>
                     ))

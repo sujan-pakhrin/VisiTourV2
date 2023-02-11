@@ -1,6 +1,7 @@
 // import { use } from 'bcrypt/promises';
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
+import './All.css';
 
 const Staff = () => {
     const [packageDetails, setpackageDetails] = useState([]);

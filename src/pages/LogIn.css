@@ -11,6 +11,12 @@ h4{
     display: flex;
     justify-content: center;
 }
+
+.main{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
 .container{
     margin-top: 20px;
     background-color: rgb(233, 232, 231);
