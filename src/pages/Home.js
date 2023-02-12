@@ -1,9 +1,9 @@
-import Axios from "axios";
+// import Axios from "axios";
 function Home(){
-    Axios.post("http://localhost:5000/api/signup", values
-        ).then((res) => {
-            consle.log(res.data)
-        })
+    // Axios.post("http://localhost:5000/api/signup", values
+    //     ).then((res) => {
+    //         console.log(res.data)
+    //     })
     return(
         <div>
             Home

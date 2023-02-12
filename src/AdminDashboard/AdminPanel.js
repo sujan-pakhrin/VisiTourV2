@@ -49,18 +49,15 @@ const AdminPanel = () => {
     else if(dataToShow==="package"){
       const dataField = document.querySelector(".div3")
       try {
-        const response = await axios.post('http://localhost:5000/api/staff');
+        const response = await axios.post('http://localhost:5000/api/package');
         const data = response.data;
         var result = `
         <table>
           <thead>
             <tr>
-              <th>UserId</th>
-              <th>UserName</th>
-              <th>UserEmail</th>
-              <th>Address</th>
-              <th>Phone</th>
-              <th>UserDOB</th>
+              <th>Package Id</th>
+              <th>Package Name</th>
+              <th>Added Date</th>
             </tr>
           </thead>
         
@@ -68,12 +65,38 @@ const AdminPanel = () => {
         data.map((data) => (
           result = result + `
           <tr>
-          <td>${data.UserId}</td>
-          <td>${data.UserName}</td>
-          <td>${data.UserEmail}</td>
-          <td>${data.UserAddress}</td>
-          <td>${data.UserPhone}</td>
-          <td>${data.UserDOB.split("T")[0]}</td>
+          <td>${data.PackageId}</td>
+          <td>${data.PackageName}</td>
+          <td>${data.AddedDate.split("T")[0]}</td>          
+        </tr>
+          `
+        ))
+      dataField.innerHTML = result;
+      } catch (e) {
+        dataField.innerHTML = " <p>Error while fetching data</p>";
+      }
+    }else if(dataToShow==="agency"){
+      const dataField = document.querySelector(".div3")
+      try {
+        const response = await axios.post('http://localhost:5000/api/agency');
+        const data = response.data;
+        var result = `
+        <table>
+          <thead>
+            <tr>
+              <th>AgencyId</th>
+              <th>AgencyName</th>
+              <th>AgencyEmail</th>
+            </tr>
+          </thead>
+        
+        <tbody>`
+        data.map((data) => (
+          result = result + `
+          <tr>
+          <td>${data.AgencyId}</td>
+          <td>${data.AgencyName}</td>
+          <td>${data.AgencyEmail}</td>
         </tr>
           `
         ))
