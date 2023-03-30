@@ -1,0 +1,54 @@
+.staff-datatable {
+    margin: 10px;
+}
+
+.staff-datatable table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.staff-datatable table thead tr th,
+.staff-datatable table tbody tr td {
+    text-align: left;
+    padding: 8px;
+}
+
+.staff-datatable table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.staff-datatable table thead tr th {
+    background-color: #4caf50;
+    color: white;
+}
+
+.staff-datatable .page-desc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.staff-datatable  .title-staff{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.staff-datatable  .title-staff .search-staff{
+    display: flex;
+    align-items: center;
+    border: 2px solid rgb(36, 172, 172);
+    border-radius: 5px;
+    padding: 3px 4px;
+}
+
+.staff-datatable  .title-staff .search-staff input{
+    border: none;
+    outline: none;
+}
+.staff-datatable  .title-staff .add-new-staff{
+    text-decoration: none;
+    color:#4caf50;
+    border: 1px solid #4caf50;
+    padding: 5px 5px;;
+    border-radius: 5px;
+}

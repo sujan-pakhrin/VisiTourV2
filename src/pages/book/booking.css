@@ -1,0 +1,30 @@
+.booking{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+    flex-direction: column;
+}
+
+.submit-booking{
+    border: 1px solid black;
+    padding: 2px 4px;
+}
+
+.booking .bookDate  input,
+.booking .startDate input,
+.booking .totalPrice input{
+    padding: 10px ;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.packageCard{
+    display: flex;
+    padding: 100px 50px;
+}
+.packageCard .package-img{
+    margin-right: 20px;
+}
+
+

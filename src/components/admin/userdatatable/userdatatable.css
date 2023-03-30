@@ -1,0 +1,59 @@
+.datatable {
+    margin: 10px;
+}
+
+.datatable table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.datatable table thead tr  th,
+.datatable table tbody tr td {
+    text-align: left;
+    padding: 8px;
+}
+
+.datatable table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.datatable table thead tr th {
+    background-color: #4caf50;
+    color: white;
+}
+
+.datatable .page-desc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.datatable .title-user{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.datatable .title-user .search-user{
+    display: flex;
+    align-items: center;
+    border: 2px solid rgb(36, 172, 172);
+    border-radius: 5px;
+    padding: 3px 4px;
+}
+
+.datatable .title-user .search-user input{
+    border: none;
+    outline: none;
+}
+.datatable .title-user .adduser .add-new-user{
+    text-decoration: none;
+    color:#4caf50;
+    border: 1px solid #4caf50;
+    padding: 5px 5px;;
+    border-radius: 5px;
+}
+/* tr{
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr 1fr 170px;
+    align-items: center;
+} */

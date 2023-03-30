@@ -1,0 +1,47 @@
+.navbar{
+    height: 50px;
+    border-bottom: 0.5px solid rgb(231,228,228);
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.navbar .wrapper{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+
+}
+
+.navbar .wrapper .items{
+    display: flex;
+    align-items: center;
+}
+.navbar .wrapper .items .item{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    position: relative;
+}
+.navbar .wrapper .items .item .admin-icon{
+    font-size: 20px;
+}
+
+.navbar .wrapper .items .item .noti-counter{
+    color: white;
+    width: 16px;
+    height: 16px;
+    background: red;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -2px;
+    right: -2px;
+}

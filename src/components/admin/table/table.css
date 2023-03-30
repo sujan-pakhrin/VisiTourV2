@@ -1,0 +1,17 @@
+.tablebody .tablerow .tableCell .cellWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.tablebody .tablerow .tableCell .status {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.tablebody .tablerow .tableCell .cellWrapper .image {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}

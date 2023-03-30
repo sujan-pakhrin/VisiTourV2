@@ -1,0 +1,156 @@
+
+*{
+    font-family: poppins, Areal;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    /* appearance: none; */
+    border: 0;
+    font-size: 13px;
+    /* text-decoration: none;
+    list-style: none;
+    box-sizing:border-box; */
+}
+
+p{
+    margin: 0;
+}
+
+.signup-background{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(360deg, rgba(255, 255, 255, 0.8),rgba(231, 235, 236, 0.8));
+}
+
+.signup-background .signup-all{
+    background: linear-gradient(360deg, rgba(0,44,62,0.8),rgba(3, 18, 24, 0.8));
+    padding: 50px 45px 50px 45px;    
+    border-radius: 5px;
+    width: 450px;
+
+}
+
+.signup-background .signup-all .signUp p{
+    font-weight: 300;
+    font-size: 40px;
+}
+
+.signup-background .signup-all .signUpDesc{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.signup-background .signup-all .signUp, 
+.signup-background .signup-all .signUpnDesc,
+.signup-background .signup-all .inputName,
+.signup-background .signup-all .inputEmail,
+.signup-background .signup-all .inputPass,
+.signup-background .signup-all .inputConformPass,
+.signup-background .signup-all .DateOfBirth,
+.signup-background .signup-all .Address,
+.signup-background .signup-all .SignUpBtn{
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-background .signup-all .SignInSection{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.signup-background .signup-all .signUpDesc p{
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-weight: 300;
+    color: white;
+}
+
+.signup-background .signup-all .inputName input,
+.signup-background .signup-all .inputEmail input,
+.signup-background .signup-all .inputPass input,
+.signup-background .signup-all .inputConformPass input,
+.signup-background .signup-all .DateOfBirth input,
+.signup-background .signup-all .Address input,
+.signup-background .signup-all .Phone input,
+.signup-background .signup-all .SignUpBtn button
+
+{
+    width: 171px;
+    padding: 6px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 2px solid #78bcc4;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: white;
+    /* font-weight: 400; */
+    background: transparent;
+}
+
+
+.signup-background .signup-all .SignUpBtn button{
+    background-color: #78bcc4;
+}
+
+.signup-background .signup-all .inputName,
+.signup-background .signup-all .DOBAddress,
+.signup-background .signup-all .passGroup,
+.signup-background .signup-all .EmailPhone,
+.signup-background .signup-all .inputConformPass{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.signup-background .signup-all .DateOfBirth input{
+    width: 171px;
+}
+
+.signup-background .signup-all input[type="text"],
+.signup-background .signup-all input[type="password"],
+.signup-background .signup-all input[type="email"],
+.signup-background .signup-all input[type="tel"]
+{
+    font-size:12px;
+}
+
+.signup-background .signup-all input[type="date"]{
+    font-size:12px;
+}
+
+.signup-background .signup-all .SignUpBtn button{
+    width: 100%;
+}
+
+@media (max-width: 768px){
+    .signup-all{
+        width: 350px;
+        padding: 30px 20px 30px 20px; 
+    }
+    .signup-background .signup-all .inputName input,
+    .signup-background .signup-all .DOBAddress input,
+    .signup-background .signup-all .EmailPhone input,
+    .signup-background .signup-all .passGroup input{
+        width: 150px;
+    }
+}
+
+@media(max-width: 653px){
+    .signup-all{
+        width: 280px;
+        padding: 30px 10px 30px 10px; 
+    }
+    .signup-background .signup-all .inputName input,
+    .signup-background .signup-all .DOBAddress input,
+    .signup-background .signup-all .EmailPhone input,
+    .signup-background .signup-all .passGroup input{
+        width: 125px;
+    }
+}

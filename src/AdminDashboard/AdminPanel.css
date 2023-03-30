@@ -1,4 +1,4 @@
-*{
+/* *{
     margin:0;
     padding: 0;
     box-sizing: border-box;
@@ -18,10 +18,12 @@
     border-bottom: 1px solid black;
     text-align: center;
 }
+
 .div2 { 
     grid-area: 2 / 1 / 11 / 2;
     border-right: 1px solid black;
 }
+
 .div3 { 
     grid-area: 2 / 2 / 11 / 7;
     /* border: 1px solid black; */
@@ -44,4 +46,4 @@ table{
 }
 table td{
     padding: 2px;
-}
+} */

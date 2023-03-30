@@ -1,0 +1,9 @@
+.staff-list {
+    display: flex;
+    width: 100%;
+
+}
+
+.staff-listContainer {
+    flex: 6;
+}
