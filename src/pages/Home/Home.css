@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.homePage_main_div{
+    width: 100%;
+}
+.homePage_main_div .homePage_featured_div{
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('./home-featured.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.homePage_main_div .homePage_featured_div .homePage_featured_centerElement{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.homePage_main_div .homePage_featured_div .homePage_featured_centerElement h1{
+    color: white;
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-shadow: 1px 0px 6px 5px rgba(0,0,0,.2);
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(99, 99, 99);
+    padding: 20px;
+    text-align: center;
+}
+.homePage_main_div .homePage_featured_div .homePage_featured_centerElement .homePage_featured_input_div{
+    width: 100%;
+    display: flex;
+    height: 70px;
+}
+.homePage_main_div .homePage_featured_div .homePage_featured_centerElement .homePage_featured_input_div .homePage_featured_input{
+    width: 80%;
+    background-color: white;
+    outline: none;
+    border: none;
+    height: 100%;
+    padding: 20px;
+}
+.homePage_main_div .homePage_featured_div .homePage_featured_centerElement .homePage_featured_input_div p{
+    width: 20%;
+    background-color: blue;
+    height: 100%;
+    color: white;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    text-align: center;
+    padding-top: 3%;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}

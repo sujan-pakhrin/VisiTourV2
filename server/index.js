@@ -563,37 +563,32 @@ app.post('/api/confirmbooking',(req,res) => {
   var userid=req.body.userid;
   var paymentmethod=req.body.paymentmethod;
   var packageid=req.body.packageid;
-  var bookdate=req.body.bookdate;
+  var startDate=req.body.bookdate;
   var noofadult=req.body.noofadult;
   var noofchild=req.body.noofchild;
-  // var noofpackagedays=1;
-  // var sql='SELECT PackageNoOfDays FROM package Where PackageId='+ mysql.escape(packageid);
-  // db.query(sql,(err,result)=>{
-  //   if(err){
-  //     console.log(err)
-  //   }else{
-  //   noofpackagedays=result
-  //   }
-    
-  // });
-  // res.send(noofpackagedays)
-  // var sql = 'SELECT * FROM user WHERE UserEmail = ' + mysql.escape(email);
-  // db.query(sql, (err, result) => {
-  //   if (err) {
-  //     res.send({ success: 0, statusCode: 500, message: "SELECT * FROM user WHERE UserEmail Query Failed", error: err })
-  //     // console.log(err)
-  //   }
-  //   else if (result.length <= 0) {
-  //     // res.send("Wrong email");
-  //     res.send({ success: 0, statusCode: 200, message: "You Entered Email is not a valid email" })
+  var additional=req.body.additional;
+  
 
-  //   }
 
   var noofpackagedays=null;
   db.query('SELECT * FROM package Where PackageId='+ packageid, (err, results) => {
     noofpackagedays= results[0].PackageNoOfDays;
     var packageprice= results[0].PackagePrice;
-    res.send({"data":noofpackagedays,"price":packageprice})
+    var totalAmount = (parseInt(noofadult) + parseInt(noofchild)) * packageprice
+    var currentDate = new Date();
+    startDate = new Date(startDate)
+    noofpackagedays = noofpackagedays
+    var endDate =  new Date(startDate.setDate(startDate.getDate() + noofpackagedays));
+    
+    var insertValues = [currentDate, startDate, endDate, noofadult, noofadult, totalAmount, packageid, userid, paymentmethod, additional]
+    db.query('INSERT INTO booking (BookingDate, StartDate, EndDate, NoOfAdult, NoOfChild, TotalAmount, packageId, userid, paymentMethod, additional) VALUES (?)', [insertValues], (error, response)=>{
+      if(error){
+        res.send({"success":0,"message": error})
+      }
+      else{
+        res.send({"success":1,"bookingid": response.insertId})
+      }
+    })
   })
  
 })

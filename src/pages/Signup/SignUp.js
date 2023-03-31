@@ -5,7 +5,7 @@ import FormInput from "../../components/FormInput";
 import { useNavigate } from 'react-router-dom';
 import "./signup.css"
 function SignUp() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     // const [signupStatus,setsignupStatus]=useState('');
@@ -141,6 +141,73 @@ function SignUp() {
     //         </form>
     //         <span>{signupStatus}</span>
     //     </div>
+
+    const [username, setUsername] = useState('');
+    const [DOB, setDOB] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+  
+    const handleUsername = (e)=>{
+        setUsername(e.target.value);
+        setSubmitted(false);
+    }
+    const handleDOB = (e)=>{
+        setDOB(e.target.value);
+        setSubmitted(false);
+    }
+    const handleAddress = (e)=>{
+        setAddress(e.target.value);
+        setSubmitted(false);
+    }
+    const handlePhone = (e)=>{
+        setPhone(e.target.value);
+        setSubmitted(false);
+    }
+    const handleEmail = (e)=>{
+        setEmail(e.target.value);
+        setSubmitted(false);
+    }
+    const handlePassword = (e)=>{
+        setPassword(e.target.value);
+        setSubmitted(false);
+    }
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        if (0) {
+          setError(true);
+        }
+        else {
+            var data = {
+                username:username,
+                dob:DOB,
+                address:address,
+                phone:phone,
+                password:password,
+                email:email
+            }
+            Axios.post("http://localhost:5000/api/signup", data)
+                .then((response)=>{
+                
+                    setSubmitted(true);
+                    setError(false);
+                    var data = response.data
+                    
+                    if(data.success==1){
+                        navigate("/login")
+                    }
+                    else{
+                        console.log(data)
+                    }
+                
+                })
+          
+        }
+    }
     return (
         <div class="signup-background">
             <div class="signup-all">
@@ -154,11 +221,9 @@ function SignUp() {
                 </div>
                 <div class="inputName">
                     <div class="inputFName">
-                        <input type="text" class="FirstName" placeholder="First Name" required="required" />
+                        <input type="text" class="FirstName" placeholder="Username" required="required" onChange={handleUsername} />
                     </div>
-                    <div class="inputLName">
-                        <input type="text" class="LastName" placeholder="Last Name" required="required" />
-                    </div>
+                    
                 </div>
                 <div class="DOBAddress">
                     <div class="DateOfBirth">
@@ -167,19 +232,21 @@ function SignUp() {
                             class="textbox-n"
                             type="date"
                             onfocus="(this.type='date')"
-                            id="date" />
+                            id="date" 
+                            onChange={handleDOB}
+                            />
                     </div>
                     <div class="Address">
-                        <input type="text" placeholder="Address" required="required" />
+                        <input type="text" placeholder="Address" required="required" onChange={handleAddress} />
                     </div>
                 </div>
 
                 <div class="EmailPhone">
                     <div class="inputEmail">
-                        <input type="email" placeholder="Email" required="required" />
+                        <input type="email" placeholder="Email" required="required" onChange={handleEmail}/>
                     </div>
                     <div class="Phone">
-                        <input class="phone" type="tel" name="phone" placeholder="Phone" />
+                        <input class="phone" type="tel" name="phone" placeholder="Phone" onChange={handlePhone}/>
                     </div>
                 </div>
 
@@ -188,12 +255,12 @@ function SignUp() {
                         <input type="password" placeholder="Password" required="required" />
                     </div>
                     <div class="inputConformPass">
-                        <input type="password" placeholder="Conform Password" required="required" />
+                        <input type="password" placeholder="Conform Password" required="required" onChange={handlePassword}/>
                     </div>
                 </div>
 
                 <div class="SignUpBtn">
-                    <button>Sign Up</button>
+                    <button onClick={handleSubmit}>Sign Up</button>
                 </div>
                 <div class="SignInSection">
                     <p>Already Have Account?</p> <a href="#">Sign in</a>

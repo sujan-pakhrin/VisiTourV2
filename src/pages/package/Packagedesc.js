@@ -63,6 +63,10 @@ const Packagedesc = () => {
   // console.log(packagedays)
   var totalPrice= (parseInt(noOfAdult)+parseInt(noOfChild))*parseInt(packageData["PackagePrice"])
 
+  const packageBooked = ()=>{
+    console.log("booked");
+   
+  }
   const confirmBooking = () => {
     var userid = Cookies.get('UserId');
     userid = (JSON.parse(userid).UserId);
@@ -80,19 +84,31 @@ const Packagedesc = () => {
     }
     if (paymentmethod !== null) {
       const confirmBook = async () => {
-        await Axios.post('http://localhost:5000/api/confirmbooking', {
-          paymentmethod: paymentmethod,
-          userid: userid,
-          packageid: packageid,
-          bookdate:bookDate,
-          noofadult:noOfAdult,
-          noofchild:noOfChild,
-          additional:additional
-          // packagedays: packagedays
-        }).then((response) => {
-          console.log(response)
+        if(paymentmethod==null || userid == undefined || userid==null || packageid == null || packageid == undefined || bookDate=='' || noOfAdult == '' || noOfChild == ''){
+          console.log("value missing")
         }
-        )
+        else{
+          await Axios.post('http://localhost:5000/api/confirmbooking', {
+            paymentmethod: paymentmethod,
+            userid: userid,
+            packageid: packageid,
+            bookdate:bookDate,
+            noofadult:noOfAdult,
+            noofchild:noOfChild,
+            additional:additional
+            // packagedays: packagedays
+          }).then((response) => {
+            var data = response.data;
+            if(data.success){
+              packageBooked()
+            }
+            else{
+              console.log(data)
+            }
+          }
+          )
+        }
+        
       }
       confirmBook()
     }
@@ -148,7 +164,9 @@ const Packagedesc = () => {
     <>
       <div></div>
       <div>
-
+        <div className="packageBooked_congrats_div">
+          <p>Congratoins</p>
+        </div>
         <div className='package-desc' >
           <div className='package-desc-header'>
             <div className='package-desc-img-section'>
@@ -286,6 +304,8 @@ const Packagedesc = () => {
         </MDBModalDialog>
       </MDBModal>
 
+
+     
     </>
   )
 }

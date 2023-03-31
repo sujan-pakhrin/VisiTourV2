@@ -1,7 +1,7 @@
 import React from 'react'
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import SignUp from "./pages/Signup/SignUp";
 import Staff from "./AdminDashboard/Staff";
 import Package from "./AdminDashboard/Package";
@@ -30,6 +30,7 @@ const App = () => {
       {/* <Layout /> */}
       <Routes>
 
+        <Route path="/" index element={<Home />} />
         <Route path="home" index element={<Home />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="booking" element={<Book />} />

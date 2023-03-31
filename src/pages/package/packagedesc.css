@@ -22,3 +22,36 @@
     text-decoration: none;
     padding-left: 10px;
 }
+
+/* congrats */
+.packageBooked_congrats_div{
+    position: absolute;
+    top: 300px;
+    left:50%;
+    transform: translate(-50%, 0);
+    background-color: white;
+    padding: 20px 30px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.6);
+    border-radius: 10px;
+    display: none;
+    opacity: 0;
+}
+.packageBooked_congrats_div p{
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: green;
+}
+.packageBooked_congrats_div.animate{
+    display: block;
+    animation: congrats_appear 500ms ease-in;
+}
+@keyframes congrats_appear {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+}

@@ -36,7 +36,7 @@ const Login = () => {
                 var urlParams = new URLSearchParams(queryString);
                 var packageid = urlParams.get('packageid');
                 console.log(packageid)
-                if (packageid === undefined) {
+                if (packageid === undefined || packageid==null) {
                     navigate('/home')
                 } else {
                     navigate('/packagedesc?id=' + packageid)
