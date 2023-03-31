@@ -1,5 +1,7 @@
 import React from 'react'
 import "./App.css";
+
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import SignUp from "./pages/Signup/SignUp";
@@ -20,6 +22,7 @@ import Package1 from './pages/admin/packagedetails/Packagedetails';
 import Book from './pages/book/Book';
 import Booking from './pages/book/Booking';
 import PackageDesc from './pages/package/Packagedesc'
+import Myprofile from './pages/user/myprofile'
 
 import Layout from "./pages/Navbar/Layout";
 
@@ -42,6 +45,8 @@ const App = () => {
         <Route path="staff" element={<Staff />} />
         <Route path="package" element={<Package />} />
         <Route path="packagedesc" element={<PackageDesc />} />
+
+        <Route path="myprofile" element={<Myprofile />} />
 
         <Route path="/admin1">
           <Route index element={<Admin1 />} />

@@ -594,6 +594,42 @@ app.post('/api/confirmbooking',(req,res) => {
 })
 
 
+app.post('/api/user/update', (req, res) => {
+  var userid = req.body.userid
+  var username = req.body.username
+  var email = req.body.email
+  var phone = req.body.phone
+  var address = req.body.address
+
+  var sql = `UPDATE user SET UserName=?, UserEmail=?, UserAddress=?, UserPhone=? WHERE UserId = ?`
+  var data =[
+    username, email, address, phone, userid
+  ]
+  db.query(sql, data, (error, result)=>{
+    if(error)
+      res.send({"success":0,"message":error});
+    else{
+      res.send({"success":1,"message": result})
+    }
+    })
+
+})
+
+app.post('/api/user/booking', (req, res) => {
+  res.send(req.body)
+  var userid = req.body.userid
+  var sql = `SELECT * FROM booking WHERE userid=${userid}`;
+  return
+  db.query(sql,(error, result)=>{
+    if(error)
+      res.send({"success":0,"message":error})
+    else{
+      res.send({"success":1,"message":result})
+    }
+  })
+})
+
+
 
 
 
