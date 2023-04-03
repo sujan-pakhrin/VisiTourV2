@@ -15,7 +15,7 @@ const Navbar = () => {
           <div className="items">
             <div className="item">
               <NotificationsIcon className='admin-icon' />
-              <div className="noti-counter">9+</div>
+              <div className="noti-counter">5</div>
             </div>
             <div className="item">
               <AccountCircleIcon className='admin-icon' />

@@ -84,7 +84,7 @@ const Book = () => {
 
     return (
         <>
-            <div className='booking'>
+            {/* <div className='booking'>
                 <div>{errorMsg}</div>
                 <div className='bookDate'>
                     <input
@@ -106,16 +106,16 @@ const Book = () => {
                         htmlFor=""
                     >totalprice</label>
                     <input type="number"
-                    // value={totalPrice}
+                    value={totalPrice}
 
                     />
                 </div>
-                {/* <div className='submit-booking'
+                <div className='submit-booking'
                     onClick={ShowAvailablePackage}>
                     Submit
-                </div> */}
+                </div>
 
-            </div>
+            </div> */}
             <div>
                 {packageData.map((post) => {
                     return (

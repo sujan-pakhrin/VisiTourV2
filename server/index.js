@@ -567,15 +567,12 @@ app.post('/api/confirmbooking',(req,res) => {
   var noofadult=req.body.noofadult;
   var noofchild=req.body.noofchild;
   var additional=req.body.additional;
-  
-
-
   var noofpackagedays=null;
   db.query('SELECT * FROM package Where PackageId='+ packageid, (err, results) => {
     noofpackagedays= results[0].PackageNoOfDays;
     var packageprice= results[0].PackagePrice;
     var totalAmount = (parseInt(noofadult) + parseInt(noofchild)) * packageprice
-    var currentDate = new Date();
+    var currentDate = new Date();  
     startDate = new Date(startDate)
     noofpackagedays = noofpackagedays
     var endDate =  new Date(startDate.setDate(startDate.getDate() + noofpackagedays));
@@ -592,6 +589,7 @@ app.post('/api/confirmbooking',(req,res) => {
   })
  
 })
+
 
 
 
