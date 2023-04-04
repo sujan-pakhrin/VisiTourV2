@@ -616,7 +616,6 @@ app.post('/api/user/booking', (req, res) => {
   res.send(req.body)
   var userid = req.body.userid
   var sql = `SELECT * FROM booking WHERE userid=${userid}`;
-  return
   db.query(sql,(error, result)=>{
     if(error)
       res.send({"success":0,"message":error})
