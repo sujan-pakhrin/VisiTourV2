@@ -625,6 +625,40 @@ app.post('/api/user/booking', (req, res) => {
   })
 })
 
+app.post("/api/popularPackages", (req,res)=>{
+  db.query("SELECT * FROM booking", (err, result)=>{
+    var packageIdArray = [];
+    result.forEach(el=>{
+      packageIdArray.push(el.packageId)
+    })
+    
+    var freqPackageId = [];
+    function mostFrequent(arr) {
+      return arr.sort((a,b) =>
+            arr.filter(v => v===a).length
+          - arr.filter(v => v===b).length
+      ).pop();
+
+    }
+    function removeElementFromArray(arr, val){
+      for (let i = arr.length - 1; i >= 0; i--) {
+        if (arr[i] === val) {
+          arr.splice(i, 1);
+        }
+      }
+      return arr;
+    }
+      
+    for(var i = 0; i<3; i++){
+      freqPackageId.push(mostFrequent(packageIdArray))
+      packageIdArray = removeElementFromArray(packageIdArray, mostFrequent(packageIdArray))
+    }
+   
+    
+    res.send({"success":1,"message":freqPackageId})
+  })
+})
+
 
 
 
