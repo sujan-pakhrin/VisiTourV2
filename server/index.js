@@ -33,6 +33,7 @@ app.get("/api/user", (req, res) => {
 app.post("/api/signin1", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+  const IsStaff = req.body.IsStaff || 0;
   var sql = 'SELECT * FROM user WHERE UserEmail = ' + mysql.escape(email);
   db.query(sql, (err, result) => {
     if (err) {
@@ -59,7 +60,15 @@ app.post("/api/signin1", (req, res) => {
               db.query(sql, (err, result) => {
                 // var message ={result.UserId,result.UserName,result.UserEmail};
                 // var result=JSON.parse(result)
-                res.send({ success: 1, statusCode: 200, message: result[0] })
+                if(IsStaff==0)
+                  res.send({ success: 1, statusCode: 200, message: result[0] })
+                else{
+                  if(result[0].IsStaff==null)
+                  res.send({success:0,message:"You are not a staff"})
+                  else
+                    res.send({success:1,message:result[0]})
+                }
+
               })
 
             }

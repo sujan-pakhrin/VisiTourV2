@@ -5,7 +5,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import SignUp from "./pages/Signup/SignUp";
-import Staff from "./AdminDashboard/Staff";
+// import Staff from "./AdminDashboard/Staff";
 import Package from "./AdminDashboard/Package";
 import Agency from "./AdminDashboard/Agency";
 import Admin from "./AdminDashboard/AdminPanel";
@@ -23,6 +23,8 @@ import Book from './pages/book/Book';
 import Booking from './pages/book/Booking';
 import PackageDesc from './pages/package/Packagedesc'
 import Myprofile from './pages/user/myprofile'
+import StaffLogin from './pages/Staff/StaffLogin'
+import Staff from './pages/Staff/Staff'
 
 import Layout from "./pages/Navbar/Layout";
 
@@ -42,11 +44,14 @@ const App = () => {
 
         <Route path="agency" element={<Agency />} />
         <Route path="admin" element={<Admin />} />
-        <Route path="staff" element={<Staff />} />
+        {/* <Route path="staff" element={<Staff />} /> */}
         <Route path="package" element={<Package />} />
         <Route path="packagedesc" element={<PackageDesc />} />
 
         <Route path="myprofile" element={<Myprofile />} />
+
+        <Route path="stafflogin" element={<StaffLogin />} />
+        <Route path="staff" element={<Staff />} />
 
         <Route path="/admin1">
           <Route index element={<Admin1 />} />

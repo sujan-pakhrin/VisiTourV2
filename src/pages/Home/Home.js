@@ -8,22 +8,26 @@ const handle_homePage_featured_input = ()=>{
 
 const Home = () => {
 
-  var [popularPackageID, setPopularPackageID] = useState([]);
-  if(popularPackageID.length==0){
+  const [popularPackages, setPopularPackages] = useState(null)
+  if(popularPackages==null){
    Axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/popularPackages`)
     .then(result=>{
-      popularPackageID = result.data.message
-      setTimeout(()=>{
+      var popularPackageID = result.data.message
+
+        var tempArr = []
         popularPackageID.forEach((id)=>{
           Axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/packagedetails`, {packageid:id})
             .then(result=>{
-              console.log(result)
+              tempArr.push(result.data[0])
             })
         })
-      },1000)
+        setPopularPackages(tempArr)
+ 
     })
   }
+  console.log(popularPackages)
   return (
+   
     <div className='homePage_main_div'>
       <div className='homePage_featured_div'>
         <div className='homePage_featured_centerElement'>
@@ -73,6 +77,7 @@ const Home = () => {
         
       </div>
     </div>
+     
   )
 }
 

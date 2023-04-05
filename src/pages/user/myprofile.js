@@ -13,6 +13,7 @@ const Myprofile = () => {
     const [email, setEmail] = useState(userdetails.UserEmail);
     const [address, setAddress] = useState(userdetails.UserAddress);
     const [phone, setPhone] = useState(userdetails.UserPhone);
+    const [packageData, setPackageData] = useState([]);
     var userid = userdetails.UserId;
     
     const handleUsername = (e)=>{
@@ -48,7 +49,6 @@ const Myprofile = () => {
     var params = {
         userid:userid
     }
-    var packageData = []
 
    const getUserBooking = ()=>{
     Axios.post(process.env.REACT_APP_SERVER_BASE_URL+"/api/user/booking", params)
@@ -59,27 +59,32 @@ const Myprofile = () => {
         }
         else{
             var mybooking = data.message;
+            var tempArr = []
             mybooking.forEach((booking)=>{
+                var packageDetails =  Axios.post('http://localhost:5000/api/packagedetails', {
+                packageid: booking.packageId
+                })
                 var entry = {
                     noOfChild:booking.NoOfChild,
                     noOfAdult:booking.NoOfAdult,
                     TotalAmount: booking.TotalAmount,
                     StartDate:booking.StartDate,
                     EndDate:booking.EndDate,
-                    packageDetails: Axios.post('http://localhost:5000/api/packagedetails', {
-                        packageid: booking.packageId
-                      }).then((result)=>{return result})
-                   
+                    packageDetails: packageDetails
                 };
-                packageData.push(entry)
-                console.log(entry)
+                tempArr.push(entry)
             })
+            setPackageData(tempArr)
         }
-
+        
     })
-   }
-   setTimeout(getUserBooking, 1000)
-   console.log(packageData)
+}
+if(packageData.length==0){
+    getUserBooking()
+}
+console.log(packageData)
+//    setTimeout(getUserBooking, 1000)
+//    console.log(packageData)
     return(
         <div className='myprofile_main_div'>
             <div className='myprofile_mydetails_div'>
