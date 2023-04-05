@@ -48,13 +48,38 @@ const Myprofile = () => {
     var params = {
         userid:userid
     }
+    var packageData = []
+
    const getUserBooking = ()=>{
-    Axios.post(process.env.REACT_APP_SERVER_BASE_URL+"api/user/booking", params)
+    Axios.post(process.env.REACT_APP_SERVER_BASE_URL+"/api/user/booking", params)
     .then((response)=>{
-        console.log(response)
+        var data = response.data;
+        if(data.success == 0){
+            console.log(data.message)
+        }
+        else{
+            var mybooking = data.message;
+            mybooking.forEach((booking)=>{
+                var entry = {
+                    noOfChild:booking.NoOfChild,
+                    noOfAdult:booking.NoOfAdult,
+                    TotalAmount: booking.TotalAmount,
+                    StartDate:booking.StartDate,
+                    EndDate:booking.EndDate,
+                    packageDetails: Axios.post('http://localhost:5000/api/packagedetails', {
+                        packageid: booking.packageId
+                      }).then((result)=>{return result})
+                   
+                };
+                packageData.push(entry)
+                console.log(entry)
+            })
+        }
+
     })
    }
-   setTimeout(getUserBooking, 5000)
+   setTimeout(getUserBooking, 1000)
+   console.log(packageData)
     return(
         <div className='myprofile_main_div'>
             <div className='myprofile_mydetails_div'>
@@ -73,11 +98,21 @@ const Myprofile = () => {
             </div>
             
             <div className='myprofile_mybookings_div'>
+                <h2>My Bookings</h2>
                 <div className='myprofile_mybookings_row'>
+                <img className='mybookings_image' src="/image/300x200.jpg"/>
+                <div>
+                    <h3>package name</h3>
+                    <p>package description</p>
+                    <p>no of child 2 no of adult 3</p>
+                    <p>total price : 4600</p>
+                    <p>Start : 2023-23-23 End: 2023-3-2</p>
+                </div>
 
                 </div>
             </div>
         </div>
+
     )
 }
 

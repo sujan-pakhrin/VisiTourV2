@@ -613,7 +613,6 @@ app.post('/api/user/update', (req, res) => {
 })
 
 app.post('/api/user/booking', (req, res) => {
-  res.send(req.body)
   var userid = req.body.userid
   var sql = `SELECT * FROM booking WHERE userid=${userid}`;
   db.query(sql,(error, result)=>{
