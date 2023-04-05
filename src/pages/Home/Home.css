@@ -58,8 +58,70 @@
     margin: 0;
     text-align: center;
     text-align: center;
-    padding-top: 3%;
+    padding-top: 18px;
     font-size: 18px;
     font-weight: 500;
+    letter-spacing: 2px;
+}
+
+/*  */
+.homePage_popularPackages_div{
+    width: 100%;
+    padding: 50px 80px;
+    height: 90vh;
+}
+.homePage_popularPackages_div > h1{
+    color: black;
+    font-size: 32px;
+}
+.homePage_popularPackages_div .homePage_popularPackages_packageCard_wrapper{
+    width: 100%;
+    margin: 30px 0;
+    display: flex;
+    gap:20px;
+}
+
+.homePage_popularPackages_div .homePage_popularPackages_packageCard_wrapper .homePage_popularPackages_packageCard_div{
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,.3);
+    cursor: pointer;
+    height: 480px;
+    max-width: 33%;
+    text-align: center;
+}
+.homePage_popularPackages_div .homePage_popularPackages_packageCard_wrapper .homePage_popularPackages_packageCard_div:hover{
+    box-shadow: 0px 0px 6px 1px rgba(0,0,0,.3);
+}
+.homePage_popularPackages_div .homePage_popularPackages_packageCard_wrapper .homePage_popularPackages_packageCard_div > img{
+    width: 100%;
+    height: 220px;
+}
+.homePage_popularPackages_div .homePage_popularPackages_packageCard_wrapper .homePage_popularPackages_packageCard_div > h3{
+    font-size: 20px;
+    margin: 15px 0 5px 0;
+    padding: 0 10px;
+    text-align: center;
+}
+.homePage_popularPackages_div .homePage_popularPackages_packageCard_wrapper .homePage_popularPackages_packageCard_div > p{
+    font-size: 16px;
+    padding: 5px 10px;
+    margin: 0;
+    text-overflow: ellipsis;
+  overflow: hidden; 
+}
+.homePage_popularPackages_div .homePage_popularPackages_packageCard_wrapper .homePage_popularPackages_packageCard_div > p.homePage_popularPackages_packageCard_description{
+    height: 70px;
+}
+.homePage_popularPackages_div .homePage_popularPackages_packageCard_wrapper .homePage_popularPackages_packageCard_div .homePage_popularPackages_packageCard_days,
+.homePage_popularPackages_div .homePage_popularPackages_packageCard_wrapper .homePage_popularPackages_packageCard_div .homePage_popularPackages_packageCard_price{
+    font-size: 16px;
+    font-weight: 600;
+}
+.homePage_popularPackages_div .homePage_popularPackages_packageCard_wrapper .homePage_popularPackages_packageCard_div .homePage_popularPackages_packageCard_btnBook{
+    
+    margin: 3px 0;
+    padding: 4px 18px;
+    font-size: 16px;
+    background-color: blue;
+    color: white;
     letter-spacing: 2px;
 }
