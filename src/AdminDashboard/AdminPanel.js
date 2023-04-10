@@ -110,11 +110,17 @@ const AdminPanel = () => {
       }
     }
   }
+
+  const handleAdd = (e)=>{
+    e.preventDefault();
+    console.log(activeButton)
+  }
   return (
     <>
     <div className="parent">
       <div className="div1">
-        <h2>Admin Panel</h2>  
+        <h2>Admin Panel</h2> 
+        <button className='add' onClick={handleAdd}>+ Add</button> 
       </div>
       <div className="div2">
         <button onClick={ showData } id="staff" className={activeButton === 'staff' ? 'active' : ''}>Staff</button>
