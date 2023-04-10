@@ -26,13 +26,13 @@ import Myprofile from './pages/user/myprofile'
 import StaffLogin from './pages/Staff/StaffLogin'
 import Staff from './pages/Staff/Staff'
 
-import Layout from "./pages/Navbar/Layout";
+// import Layout from "./pages/Navbar/Layout";
 
 const App = () => {
 
   return (
     <BrowserRouter>
-      <Layout />
+      {/* <Layout /> */}
       <Routes>
 
         <Route path="/" index element={<Home />} />
@@ -45,7 +45,7 @@ const App = () => {
         <Route path="agency" element={<Agency />} />
         <Route path="admin" element={<Admin />} />
         {/* <Route path="staff" element={<Staff />} /> */}
-        <Route path="package" element={<Package />} />
+        {/* <Route path="package" element={<Package />} /> */}
         <Route path="packagedesc" element={<PackageDesc />} />
 
         <Route path="myprofile" element={<Myprofile />} />
@@ -75,8 +75,6 @@ const App = () => {
       </Routes>
       
     </BrowserRouter>
-
-
   );
 };
 export default App

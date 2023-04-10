@@ -21,8 +21,7 @@ const Home = () => {
               tempArr.push(result.data[0])
             })
         })
-        setPopularPackages(tempArr)
- 
+        setPopularPackages(tempArr) 
     })
   }
   console.log(popularPackages)

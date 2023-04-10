@@ -54,7 +54,7 @@
 //     Axios.post(process.env.REACT_APP_SERVER_BASE_URL+"/api/user/booking", params)
 //     .then((response)=>{
 //         var data = response.data;
-//         if(data.success == 0){
+//         if(data.success ===0){
 //             console.log(data.message)
 //         }
 //         else{
@@ -105,7 +105,7 @@
 //             <div className='myprofile_mybookings_div'>
 //                 <h2>My Bookings</h2>
 //                 <div className='myprofile_mybookings_row'>
-//                 <img className='mybookings_image' src="/image/300x200.jpg"/>
+//                 <img className='mybookings_image' src="/image/300x200.jpg" alt=""/>
 //                 <div>
 //                     <h3>package name</h3>
 //                     <p>package description</p>
