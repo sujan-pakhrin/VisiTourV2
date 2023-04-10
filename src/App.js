@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {/* <Layout /> */}
+      <Layout />
       <Routes>
 
         <Route path="/" index element={<Home />} />
@@ -75,6 +75,8 @@ const App = () => {
       </Routes>
       
     </BrowserRouter>
+
+
   );
 };
 export default App
