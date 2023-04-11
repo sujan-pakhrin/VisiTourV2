@@ -60,6 +60,13 @@ const AdminPanel = () => {
               <th>Package Id</th>
               <th>Package Name</th>
               <th>Added Date</th>
+              <th>PackagePrice</th>
+              <th>PackageNoOfDays</th>
+              <th>PackageDescription</th>
+              <th>PackageIteration</th>
+              <th>PackageInclude</th>
+              <th>PackageExclude</th>
+              <th>AgencyId</th>
             </tr>
           </thead>
         
@@ -70,9 +77,17 @@ const AdminPanel = () => {
           <td>${data.PackageId}</td>
           <td>${data.PackageName}</td>
           <td>${data.AddedDate.split("T")[0]}</td>          
+          <td>${data.PackagePrice}</td>
+          <td>${data.PackageNoOfDays}</td>
+          <td>${data.PackageDescription}</td>
+          <td>${data.PackageIteration}</td>
+          <td>${data.PackageInclude}</td>
+          <td>${data.PackageExclude}</td>
+          <td>${data.AgencyId}</td>
         </tr>
           `
         ))
+        console.log(data)
       dataField.innerHTML = result;
       } catch (e) {
         dataField.innerHTML = " <p>Error while fetching data</p>";
@@ -158,10 +173,9 @@ const AdminPanel = () => {
       }
     }
   }
-
-  const submitData = async(e)=>{
-    e.preventDefault();
-    if(document.querySelector(".UserName")===null) return
+// handle submit
+const submitNewStaff = async()=>{
+  if(document.querySelector(".UserName")===null) return
     else{
       var emptyInput = false
       var UserName = []
@@ -236,7 +250,135 @@ const AdminPanel = () => {
        
 
     }
+}
+const submitNewPackage = async()=>{
+  if(document.querySelector(".PackageName")===null) return
+    else{
+      var emptyInput = false
+      var PackageName = []
+      var AddedDate = []
+      var PackagePrice = []
+      var PackageNoOfDays = []
+      var PackageDescription = []
+      var PackageIteration = []
+      var PackageInclude = []
+      var PackageExclude = []
+      var AgencyId = []
+      document.querySelectorAll(".PackageName").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        PackageName.push(input.value)
+      })
+      document.querySelectorAll(".AddedDate").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        AddedDate.push(input.value)
+      })
+      document.querySelectorAll(".PackagePrice").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        PackagePrice.push(input.value)
+      })
+      document.querySelectorAll(".PackageNoOfDays").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        PackageNoOfDays.push(input.value)
+      })
+      document.querySelectorAll(".PackageDescription").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        PackageDescription.push(input.value)
+      })
+      document.querySelectorAll(".PackageIteration").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        PackageIteration.push(input.value)
+      })
+      document.querySelectorAll(".PackageInclude").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        PackageInclude.push(input.value)
+      })
+      document.querySelectorAll(".PackageExclude").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        PackageExclude.push(input.value)
+      })
+      document.querySelectorAll(".AgencyId").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        AgencyId.push(input.value)
+      })
+
+      if(emptyInput){
+        console.log("empty input")
+        return
+      }
+      var newData = PackageName.map((PackageName,index)=>{
+        return{
+          PackageName:PackageName,
+          AddedDate:AddedDate[index],
+          PackagePrice:PackagePrice[index],
+          PackageNoOfDays:PackageNoOfDays[index],
+          PackageDescription:PackageDescription[index],
+          PackageIteration:PackageIteration[index],
+          PackageInclude:PackageInclude[index],
+          PackageExclude:PackageExclude[index],
+          AgencyId:AgencyId[index],
+        }
+      })
+      // var rejected = [];
+      // newData.forEach(async(data)=>{
+      //   const response = await axios.post('http://localhost:5000/api/signup', data);
+      //   if(response.data.success===0){
+      //     rejected.push({data,response})
+      //     return
+      //   }
+      //   console.log(response)
+      // })
+    
+      // setTimeout(()=>{
+      //   console.log("rejected",rejected)
+      //   document.querySelector("#staff").click()
+      // }, 1000)
+      console.log(newData)
+       
+
+    }
+}
+
+//
+  const submitData = async(e)=>{
+    e.preventDefault();
+    switch(activeButton){
+      case 'staff':
+        submitNewStaff();
+        break;
+      case 'package':
+        submitNewPackage();
+          
+    }
+
   }
+
   const handleAdd = (e)=>{
     e.preventDefault();
     if(activeButton===null) return
@@ -251,6 +393,24 @@ const AdminPanel = () => {
         <td><input type='text' placeholder='address' class="UserAddress"></td>
         <td><input type='text' placeholder='phone' class="UserPhone"></td>
         <td><input type='date' placeholder='DOB' class="UserDOB"></td>
+      </tr>`
+      dataField.innerHTML += result;
+    }
+    else if(activeButton=="package"){
+      const dataField = document.querySelector(".div3 table tbody")
+      var result =
+      `
+      <tr>
+        <td>#</td>
+        <td><input type='text' placeholder='PackageName' class="PackageName"></td>
+        <td><input type='date' placeholder='AddedDate' class="AddedDate"></td>
+        <td><input type='text' placeholder='PackagePrice' class="PackagePrice"></td>
+        <td><input type='text' placeholder='PackageNoOfDays' class="PackageNoOfDays"></td>
+        <td><input type='text' placeholder='PackageDescription' class="PackageDescription"></td>
+        <td><input type='text' placeholder='PackageIteration' class="PackageIteration"></td>
+        <td><input type='text' placeholder='PackageInclude' class="PackageInclude"></td>
+        <td><input type='text' placeholder='PackageExclude' class="PackageExclude"></td>
+        <td><input type='text' placeholder='AgencyId' class="AgencyId"></td>
       </tr>`
       dataField.innerHTML += result;
     }

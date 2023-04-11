@@ -68,5 +68,9 @@ table{
 }
 table td{
     padding: 2px;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
