@@ -632,6 +632,17 @@ app.post('/api/user/booking', (req, res) => {
     }
   })
 })
+app.post('/api/booking', (req, res) => {
+  var userid = req.body.userid
+  var sql = `SELECT * FROM booking`;
+  db.query(sql,(error, result)=>{
+    if(error)
+      res.send({"success":0,"message":error})
+    else{
+      res.send({"success":1,"message":result})
+    }
+  })
+})
 
 app.post("/api/popularPackages", (req,res)=>{
   db.query("SELECT * FROM booking", (err, result)=>{
