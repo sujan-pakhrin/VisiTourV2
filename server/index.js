@@ -92,7 +92,7 @@ app.post("/api/signup", async (req, res) => {
   const userDOB = req.body.dob;
   const userAddress = req.body.address;
   const userPhone = req.body.phone;
-
+  const IsStaff = req.body.IsStaff || 0;
   var sql = 'SELECT * FROM user WHERE UserEmail = ' + mysql.escape(email);
   db.query(sql, (err, result) => {
     if (err)
@@ -111,8 +111,15 @@ app.post("/api/signup", async (req, res) => {
         }
         else {
           bcrypt.hash(password, 10, function (err, hash) {
+            var values=[];
+           if(IsStaff==0){
             sql = "INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone) VALUES (?)";
-            var values = [username, email, hash, userDOB, userAddress, userPhone];
+            values = [username, email, hash, userDOB, userAddress, userPhone];
+           }
+           else{
+            sql = "INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone, IsStaff) VALUES (?)";
+            var values = [username, email, hash, userDOB, userAddress, userPhone, 1];
+           }
             db.query(sql, [values], (err, result) => {
               if (err)
                 res.send({ success: 0, statusCode: 500, message: "INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone) Query Failed", error: err })

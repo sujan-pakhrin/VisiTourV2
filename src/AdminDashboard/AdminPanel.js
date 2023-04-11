@@ -204,30 +204,37 @@ const AdminPanel = () => {
         }
         UserDOB.push(input.value)
       })
-      // if(emptyInput){
-      //   console.log("empty input")
-      //   return
-      // }
+      if(emptyInput){
+        console.log("empty input")
+        return
+      }
       var newData = UserName.map((UserName,index)=>{
         return{
           password:"root",
           username:UserName,
           email:UserEmail[index],
-          userAddress:UserAddress[index],
-          userPhone:UserPhone[index],
-          userDOB:UserDOB[index],
+          address:UserAddress[index],
+          phone:UserPhone[index],
+          dob:UserDOB[index],
+          IsStaff:1
         }
       })
       var rejected = [];
       newData.forEach(async(data)=>{
         const response = await axios.post('http://localhost:5000/api/signup', data);
-        // if(response.data.success===0){
-        //   rejected.push(data)
-        //   // return
-        // }
+        if(response.data.success===0){
+          rejected.push({data,response})
+          return
+        }
         console.log(response)
       })
-      // console.log("rejected",rejected)
+    
+      setTimeout(()=>{
+        console.log("rejected",rejected)
+        document.querySelector("#staff").click()
+      }, 1000)
+       
+
     }
   }
   const handleAdd = (e)=>{
