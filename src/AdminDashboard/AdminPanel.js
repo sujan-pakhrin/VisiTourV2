@@ -53,6 +53,16 @@ const AdminPanel = () => {
       try {
         const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/package`);
         const data = response.data;
+        var PackageIteration = (data).map((el,index)=>{
+          return Object.values(JSON.parse(el.PackageIteration))
+        })
+        var PackageInclude = (data).map((el,index)=>{
+          return (JSON.parse(el.PackageInclude))
+        })
+        var PackageExclude = (data).map((el,index)=>{
+          return (JSON.parse(el.PackageExclude))
+        })
+        console.log(PackageExclude)
         var result = `
         <table>
           <thead>
@@ -71,7 +81,7 @@ const AdminPanel = () => {
           </thead>
         
         <tbody>`
-        data.map((data) => (
+        data.map((data,index) => (
           result = result + `
           <tr>
           <td>${data.PackageId}</td>
@@ -80,9 +90,9 @@ const AdminPanel = () => {
           <td>${data.PackagePrice}</td>
           <td>${data.PackageNoOfDays}</td>
           <td>${data.PackageDescription}</td>
-          <td>${data.PackageIteration}</td>
-          <td>${data.PackageInclude}</td>
-          <td>${data.PackageExclude}</td>
+          <td>${PackageIteration[index]}</td>
+          <td>${PackageInclude[index]}</td>
+          <td>${PackageExclude[index]}</td>
           <td>${data.AgencyId}</td>
         </tr>
           `
@@ -328,10 +338,20 @@ const submitNewPackage = async()=>{
         AgencyId.push(input.value)
       })
 
-      if(emptyInput){
-        console.log("empty input")
-        return
-      }
+      // if(emptyInput){
+      //   console.log("empty input")
+      //   return
+      // }
+      PackageIteration = PackageIteration.map(async(iteration,index)=>{
+      
+        return iteration.split(',')
+      })
+      PackageInclude = PackageInclude.map((iteration,index)=>{
+        return iteration.split(',')
+      })
+      PackageExclude = PackageExclude.map((iteration,index)=>{
+        return iteration.split(',')
+      })
       var newData = PackageName.map((PackageName,index)=>{
         return{
           PackageName:PackageName,
@@ -421,6 +441,92 @@ const submitNewAgency = async()=>{
 
     }
 }
+const submitNewBooking = async()=>{
+      var emptyInput = false
+      var StartDate = []
+      var NoOfAdult = []
+      var NoOfChild = []
+      var packageId = []
+      var paymentMethod = []
+      var userid = []
+      var additional = []
+      document.querySelectorAll(".StartDate").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        StartDate.push(input.value)
+      })
+      document.querySelectorAll(".NoOfAdult").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        NoOfAdult.push(input.value)
+      })
+      document.querySelectorAll(".NoOfChild").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        NoOfChild.push(input.value)
+      })
+      document.querySelectorAll(".packageId").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        packageId.push(input.value)
+      })
+      document.querySelectorAll(".paymentMethod").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        paymentMethod.push(input.value)
+      })
+      document.querySelectorAll(".userid").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        userid.push(input.value)
+      })
+      document.querySelectorAll(".additional").forEach(input=>{
+        additional.push(input.value)
+      })
+      if(emptyInput){
+        console.log("empty input")
+        return
+      }
+      var newData = StartDate.map((StartDate,index)=>{
+        return{
+          bookdate:StartDate,
+          userid:userid[index],
+          paymentmethod:paymentMethod[index],
+          packageid:packageId[index],
+          noofadult:NoOfAdult[index],
+          noofchild:NoOfChild[index],
+          additional:additional[index],
+        }
+      })
+      var rejected = [];
+      newData.forEach(async(data)=>{
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/confirmbooking`, data);
+        if(response.data.success===0){
+          rejected.push({data,response})
+          return
+        }
+        console.log(response)
+      })
+    
+      setTimeout(()=>{
+        console.log("rejected",rejected)
+        document.querySelector("#booking").click()
+      }, 1000)
+      console.log(newData)
+    
+}
 //
   const submitData = async(e)=>{
     e.preventDefault();
@@ -433,6 +539,9 @@ const submitNewAgency = async()=>{
         break;
       case 'agency':
         submitNewAgency();
+        break;
+      case 'booking':
+        submitNewBooking();
         break;
           
     }
@@ -483,6 +592,25 @@ const submitNewAgency = async()=>{
         <td><input type='text' placeholder='AgencyName' class="AgencyName"></td>
         <td><input type='text' placeholder='AgencyEmail' class="AgencyEmail"></td>
         <td><input type='text' placeholder='AgencyPhone' class="AgencyPhone"></td>
+      </tr>`
+      dataField.innerHTML += result;
+    }
+    else if(activeButton=="booking"){
+      const dataField = document.querySelector(".div3 table tbody")
+      var result =
+      `
+      <tr>
+        <td>#</td>
+        <td>#</td>
+        <td><input type='date' placeholder='StartDate' class="StartDate"></td>
+        <td>#</td>
+        <td><input type='text' placeholder='NoOfAdult' class="NoOfAdult"></td>
+        <td><input type='text' placeholder='NoOfChild' class="NoOfChild"></td>
+        <td>#</td>
+        <td><input type='text' placeholder='packageId' class="packageId"></td>
+        <td><input type='text' placeholder='paymentMethod' class="paymentMethod"></td>
+        <td><input type='text' placeholder='userid' class="userid"></td>
+        <td><input type='text' placeholder='additional' class="additional"></td>
       </tr>`
       dataField.innerHTML += result;
     }
