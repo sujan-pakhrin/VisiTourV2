@@ -45,7 +45,9 @@ button#confirm{
 
 .div3 { 
     grid-area: 2 / 2 / 11 / 7;
+    overflow-y: scroll;
     /* border: 1px solid black; */
+    
 }
 .div3 table input{
     border-bottom: 1px solid black;

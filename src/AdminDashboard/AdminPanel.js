@@ -14,7 +14,7 @@ const AdminPanel = () => {
     if(dataToShow==="staff"){
       const dataField = document.querySelector(".div3")
       try {
-        const response = await axios.post('http://localhost:5000/api/staff');
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/staff`);
         const data = response.data;
         var result = `
         <table>
@@ -51,7 +51,7 @@ const AdminPanel = () => {
     else if(dataToShow==="package"){
       const dataField = document.querySelector(".div3")
       try {
-        const response = await axios.post('http://localhost:5000/api/package');
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/package`);
         const data = response.data;
         var result = `
         <table>
@@ -95,7 +95,7 @@ const AdminPanel = () => {
     }else if(dataToShow==="agency"){
       const dataField = document.querySelector(".div3")
       try {
-        const response = await axios.post('http://localhost:5000/api/agency');
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/agency`);
         const data = response.data;
         var result = `
         <table>
@@ -128,7 +128,7 @@ const AdminPanel = () => {
     else if(dataToShow==="booking"){
       const dataField = document.querySelector(".div3")
       try {
-        const response = await axios.post('http://localhost:5000/api/booking');
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/booking`);
         const data = response.data.message;
         var result = `
         <table>
@@ -235,7 +235,7 @@ const submitNewStaff = async()=>{
       })
       var rejected = [];
       newData.forEach(async(data)=>{
-        const response = await axios.post('http://localhost:5000/api/signup', data);
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/signup`, data);
         if(response.data.success===0){
           rejected.push({data,response})
           return
@@ -347,7 +347,7 @@ const submitNewPackage = async()=>{
       })
       // var rejected = [];
       // newData.forEach(async(data)=>{
-      //   const response = await axios.post('http://localhost:5000/api/signup', data);
+      //   const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/signup`, data);
       //   if(response.data.success===0){
       //     rejected.push({data,response})
       //     return
@@ -364,7 +364,63 @@ const submitNewPackage = async()=>{
 
     }
 }
+const submitNewAgency = async()=>{
+  if(document.querySelector(".AgencyName")===null) return
+    else{
+      var emptyInput = false
+      var AgencyName = []
+      var AgencyEmail = []
+      var AgencyPhone = []
+      document.querySelectorAll(".AgencyName").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        AgencyName.push(input.value)
+      })
+      document.querySelectorAll(".AgencyEmail").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        AgencyEmail.push(input.value)
+      })
+      document.querySelectorAll(".AgencyPhone").forEach(input=>{
+        if(input.value===''){
+          emptyInput=true
+          return
+        }
+        AgencyPhone.push(input.value)
+      })
+      if(emptyInput){
+        console.log("empty input")
+        return
+      }
+      var newData = AgencyName.map((AgencyName,index)=>{
+        return{
+          // password:"root",
+          AgencyName:AgencyName,
+          AgencyEmail:AgencyEmail[index],
+          AgencyPhone:AgencyPhone[index],
+        }
+      })
+      var rejected = [];
+      newData.forEach(async(data)=>{
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/add/agency`, data);
+        if(response.data.success===0){
+          rejected.push({data,response})
+          return
+        }
+        console.log(response)
+      })
+    
+      setTimeout(()=>{
+        console.log("rejected",rejected)
+        document.querySelector("#agency").click()
+      }, 1000)
 
+    }
+}
 //
   const submitData = async(e)=>{
     e.preventDefault();
@@ -374,6 +430,10 @@ const submitNewPackage = async()=>{
         break;
       case 'package':
         submitNewPackage();
+        break;
+      case 'agency':
+        submitNewAgency();
+        break;
           
     }
 
@@ -411,6 +471,18 @@ const submitNewPackage = async()=>{
         <td><input type='text' placeholder='PackageInclude' class="PackageInclude"></td>
         <td><input type='text' placeholder='PackageExclude' class="PackageExclude"></td>
         <td><input type='text' placeholder='AgencyId' class="AgencyId"></td>
+      </tr>`
+      dataField.innerHTML += result;
+    }
+    else if(activeButton=="agency"){
+      const dataField = document.querySelector(".div3 table tbody")
+      var result =
+      `
+      <tr>
+        <td>#</td>
+        <td><input type='text' placeholder='AgencyName' class="AgencyName"></td>
+        <td><input type='text' placeholder='AgencyEmail' class="AgencyEmail"></td>
+        <td><input type='text' placeholder='AgencyPhone' class="AgencyPhone"></td>
       </tr>`
       dataField.innerHTML += result;
     }

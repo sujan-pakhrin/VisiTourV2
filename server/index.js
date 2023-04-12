@@ -167,6 +167,47 @@ app.post("/api/agency", (req, res) => {
     res.send(result)
   });
 });
+app.post("/api/add/agency", (req, res) => {
+  var AgencyName = req.body.AgencyName
+  var AgencyEmail = req.body.AgencyEmail
+  var AgencyPhone = req.body.AgencyPhone
+  var AgencyPassword = "root"
+  var sql = 'SELECT * FROM agency WHERE AgencyName = ' + mysql.escape(AgencyName);
+  db.query(sql, (err, result) => {
+    if (err)
+      res.send({ success: 0, statusCode: 500, message: "SELECT * FROM agency WHERE AgencyName Query Failed", error: err })
+    else if (result.length > 0) {
+      res.send({ success: 0, statusCode: 200, message: "AgencyEmail already exists" })
+    }
+    else {
+      var sql = 'SELECT * FROM agency WHERE AgencyPhone = ' + mysql.escape(AgencyPhone);
+      db.query(sql, (err, result) => {
+        if (err)
+          res.send({ success: 0, statusCode: 500, message: "SELECT * FROM agency WHERE AgencyPhone Query Failed", error: err })
+
+        else if (result.length > 0) {
+          res.send({ success: 0, statusCode: 200, message: "Phone Number already exists" })
+        }
+        else {
+          bcrypt.hash(AgencyPassword, 10, function (err, hash) {
+            sql = "INSERT INTO agency (AgencyName, AgencyEmail, AgencyPassword, AgencyPhone) VALUES (?)";
+            values = [AgencyName, AgencyEmail, hash, AgencyPhone];
+          
+            db.query(sql, [values], (err, result) => {
+              if (err)
+                res.send({ success: 0, statusCode: 500, message: "INSERT INTO agency (AgencyName, AgencyEmail, AgencyPassword, AgencyPhone) Query Failed", error: err })
+              else {
+                res.send({ success: 1, statusCode: 200, message: result })
+              
+              }
+            })
+        })
+      }
+      });
+    }
+  });
+  
+});
 
 // app.patch("/api/updateStaff", (req, res) => {
 //   const id=req.body.id
