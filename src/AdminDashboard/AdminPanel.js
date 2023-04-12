@@ -342,7 +342,7 @@ const submitNewPackage = async()=>{
       //   console.log("empty input")
       //   return
       // }
-      PackageIteration = PackageIteration.map(async(iteration,index)=>{
+      PackageIteration = PackageIteration.map((iteration,index)=>{
       
         return iteration.split(',')
       })
