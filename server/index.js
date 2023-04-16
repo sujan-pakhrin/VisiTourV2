@@ -191,7 +191,7 @@ app.post("/api/add/agency", (req, res) => {
         else {
           bcrypt.hash(AgencyPassword, 10, function (err, hash) {
             sql = "INSERT INTO agency (AgencyName, AgencyEmail, AgencyPassword, AgencyPhone) VALUES (?)";
-            values = [AgencyName, AgencyEmail, hash, AgencyPhone];
+            var values = [AgencyName, AgencyEmail, hash, AgencyPhone];
           
             db.query(sql, [values], (err, result) => {
               if (err)
@@ -677,6 +677,8 @@ app.post('/api/user/booking', (req, res) => {
       res.send({"success":0,"message":error})
     else{
       res.send({"success":1,"message":result})
+      console.log("New Response", res.data)
+      // res.send(result);
     }
   })
 })

@@ -14,7 +14,9 @@ const AdminPanel = () => {
     if(dataToShow==="staff"){
       const dataField = document.querySelector(".div3")
       try {
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/staff`);
+        // http://localhost:5000
+        // http://localhost:5000
+        const response = await axios.post(`http://localhost:5000/api/staff`);
         const data = response.data;
         var result = `
         <table>
@@ -51,7 +53,7 @@ const AdminPanel = () => {
     else if(dataToShow==="package"){
       const dataField = document.querySelector(".div3")
       try {
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/package`);
+        const response = await axios.post(`http://localhost:5000/api/package`);
         const data = response.data;
         var PackageIteration = (data).map((el,index)=>{
           return Object.values(JSON.parse(el.PackageIteration))
@@ -105,7 +107,7 @@ const AdminPanel = () => {
     }else if(dataToShow==="agency"){
       const dataField = document.querySelector(".div3")
       try {
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/agency`);
+        const response = await axios.post(`http://localhost:5000/api/agency`);
         const data = response.data;
         var result = `
         <table>
@@ -138,7 +140,7 @@ const AdminPanel = () => {
     else if(dataToShow==="booking"){
       const dataField = document.querySelector(".div3")
       try {
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/booking`);
+        const response = await axios.post(`http://localhost:5000/api/booking`);
         const data = response.data.message;
         var result = `
         <table>
@@ -245,7 +247,7 @@ const submitNewStaff = async()=>{
       })
       var rejected = [];
       newData.forEach(async(data)=>{
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/signup`, data);
+        const response = await axios.post(`http://localhost:5000/api/signup`, data);
         if(response.data.success===0){
           rejected.push({data,response})
           return
@@ -367,7 +369,7 @@ const submitNewPackage = async()=>{
       })
       // var rejected = [];
       // newData.forEach(async(data)=>{
-      //   const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/signup`, data);
+      //   const response = await axios.post(`http://localhost:5000/api/signup`, data);
       //   if(response.data.success===0){
       //     rejected.push({data,response})
       //     return
@@ -426,7 +428,7 @@ const submitNewAgency = async()=>{
       })
       var rejected = [];
       newData.forEach(async(data)=>{
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/add/agency`, data);
+        const response = await axios.post(`http://localhost:5000/api/add/agency`, data);
         if(response.data.success===0){
           rejected.push({data,response})
           return
@@ -512,7 +514,7 @@ const submitNewBooking = async()=>{
       })
       var rejected = [];
       newData.forEach(async(data)=>{
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/confirmbooking`, data);
+        const response = await axios.post(`http://localhost:5000/api/confirmbooking`, data);
         if(response.data.success===0){
           rejected.push({data,response})
           return

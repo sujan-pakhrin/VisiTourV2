@@ -84,7 +84,7 @@ const Packagedesc = () => {
     }
     if (paymentmethod !== null) {
       const confirmBook = async () => {
-        if(paymentmethod==null || userid == undefined || userid==null || packageid == null || packageid == undefined || bookDate=='' || noOfAdult == '' || noOfChild == ''){
+        if(paymentmethod==null || userid === undefined || userid==null || packageid == null || packageid === undefined || bookDate==='' || noOfAdult === '' || noOfChild === ''){
           console.log("value missing")
         }
         else{
