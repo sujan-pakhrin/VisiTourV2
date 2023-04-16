@@ -112,13 +112,13 @@ app.post("/api/signup", async (req, res) => {
         else {
           bcrypt.hash(password, 10, function (err, hash) {
             var values=[];
-           if(IsStaff==0){
+           if(IsStaff===0){
             sql = "INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone) VALUES (?)";
             values = [username, email, hash, userDOB, userAddress, userPhone];
            }
            else{
             sql = "INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone, IsStaff) VALUES (?)";
-            var values = [username, email, hash, userDOB, userAddress, userPhone, 1];
+            values = [username, email, hash, userDOB, userAddress, userPhone, 1];
            }
             db.query(sql, [values], (err, result) => {
               if (err)
