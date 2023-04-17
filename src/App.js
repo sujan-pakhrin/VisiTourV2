@@ -22,7 +22,7 @@ import Package1 from './pages/admin/packagedetails/Packagedetails';
 import Book from './pages/book/Book';
 import Booking from './pages/book/Booking';
 import PackageDesc from './pages/package/Packagedesc'
-import Myprofile from './pages/user/myprofile'
+// import Myprofile from './pages/user/myprofile'
 import StaffLogin from './pages/Staff/StaffLogin'
 import Staff from './pages/Staff/Staff'
 
@@ -47,7 +47,7 @@ const App = () => {
         {/* <Route path="package" element={<Package />} /> */}
         <Route path="packagedesc" element={<PackageDesc />} />
 
-        <Route path="myprofile" element={<Myprofile />} />
+        {/* <Route path="myprofile" element={<Myprofile />} /> */}
 
         <Route path="stafflogin" element={<StaffLogin />} />
         <Route path="staff" element={<Staff />} />
