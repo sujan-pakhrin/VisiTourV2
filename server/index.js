@@ -60,13 +60,13 @@ app.post("/api/signin1", (req, res) => {
               db.query(sql, (err, result) => {
                 // var message ={result.UserId,result.UserName,result.UserEmail};
                 // var result=JSON.parse(result)
-                if(IsStaff==0)
+                if (IsStaff == 0)
                   res.send({ success: 1, statusCode: 200, message: result[0] })
-                else{
-                  if(result[0].IsStaff==null)
-                  res.send({success:0,message:"You are not a staff"})
+                else {
+                  if (result[0].IsStaff == null)
+                    res.send({ success: 0, message: "You are not a staff" })
                   else
-                    res.send({success:1,message:result[0]})
+                    res.send({ success: 1, message: result[0] })
                 }
 
               })
@@ -111,15 +111,15 @@ app.post("/api/signup", async (req, res) => {
         }
         else {
           bcrypt.hash(password, 10, function (err, hash) {
-            var values=[];
-           if(IsStaff===0){
-            sql = "INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone) VALUES (?)";
-            values = [username, email, hash, userDOB, userAddress, userPhone];
-           }
-           else{
-            sql = "INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone, IsStaff) VALUES (?)";
-            values = [username, email, hash, userDOB, userAddress, userPhone, 1];
-           }
+            var values = [];
+            if (IsStaff === 0) {
+              sql = "INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone) VALUES (?)";
+              values = [username, email, hash, userDOB, userAddress, userPhone];
+            }
+            else {
+              sql = "INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone, IsStaff) VALUES (?)";
+              values = [username, email, hash, userDOB, userAddress, userPhone, 1];
+            }
             db.query(sql, [values], (err, result) => {
               if (err)
                 res.send({ success: 0, statusCode: 500, message: "INSERT INTO user (UserName, UserEmail, UserPassword, UserDOB, UserAddress, UserPhone) Query Failed", error: err })
@@ -192,21 +192,21 @@ app.post("/api/add/agency", (req, res) => {
           bcrypt.hash(AgencyPassword, 10, function (err, hash) {
             sql = "INSERT INTO agency (AgencyName, AgencyEmail, AgencyPassword, AgencyPhone) VALUES (?)";
             var values = [AgencyName, AgencyEmail, hash, AgencyPhone];
-          
+
             db.query(sql, [values], (err, result) => {
               if (err)
                 res.send({ success: 0, statusCode: 500, message: "INSERT INTO agency (AgencyName, AgencyEmail, AgencyPassword, AgencyPhone) Query Failed", error: err })
               else {
                 res.send({ success: 1, statusCode: 200, message: result })
-              
+
               }
             })
-        })
-      }
+          })
+        }
       });
     }
   });
-  
+
 });
 
 // app.patch("/api/updateStaff", (req, res) => {
@@ -608,43 +608,43 @@ app.post('/api/showavailablepackage', (req, res) => {
 
 app.post('/api/packagedetails', (req, res) => {
   // res.send(req.body)
-  var packageid=req.body.packageid;
- 
-  db.query('SELECT * FROM package Where PackageId='+ packageid, (err, results) => {
+  var packageid = req.body.packageid;
+
+  db.query('SELECT * FROM package Where PackageId=' + packageid, (err, results) => {
     res.send(results)
   })
 })
 
-app.post('/api/confirmbooking',(req,res) => {
+app.post('/api/confirmbooking', (req, res) => {
   // res.send(req.body)
-  var userid=req.body.userid;
-  var paymentmethod=req.body.paymentmethod;
-  var packageid=req.body.packageid;
-  var startDate=req.body.bookdate;
-  var noofadult=req.body.noofadult;
-  var noofchild=req.body.noofchild;
-  var additional=req.body.additional;
-  var noofpackagedays=null;
-  db.query('SELECT * FROM package Where PackageId='+ packageid, (err, results) => {
-    noofpackagedays= results[0].PackageNoOfDays;
-    var packageprice= results[0].PackagePrice;
+  var userid = req.body.userid;
+  var paymentmethod = req.body.paymentmethod;
+  var packageid = req.body.packageid;
+  var startDate = req.body.bookdate;
+  var noofadult = req.body.noofadult;
+  var noofchild = req.body.noofchild;
+  var additional = req.body.additional;
+  var noofpackagedays = null;
+  db.query('SELECT * FROM package Where PackageId=' + packageid, (err, results) => {
+    noofpackagedays = results[0].PackageNoOfDays;
+    var packageprice = results[0].PackagePrice;
     var totalAmount = (parseInt(noofadult) + parseInt(noofchild)) * packageprice
-    var currentDate = new Date();  
+    var currentDate = new Date();
     startDate = new Date(startDate)
     noofpackagedays = noofpackagedays
-    var endDate =  new Date(startDate.setDate(startDate.getDate() + noofpackagedays));
-    
+    var endDate = new Date(startDate.setDate(startDate.getDate() + noofpackagedays));
+
     var insertValues = [currentDate, startDate, endDate, noofadult, noofadult, totalAmount, packageid, userid, paymentmethod, additional]
-    db.query('INSERT INTO booking (BookingDate, StartDate, EndDate, NoOfAdult, NoOfChild, TotalAmount, packageId, userid, paymentMethod, additional) VALUES (?)', [insertValues], (error, response)=>{
-      if(error){
-        res.send({"success":0,"message": error})
+    db.query('INSERT INTO booking (BookingDate, StartDate, EndDate, NoOfAdult, NoOfChild, TotalAmount, packageId, userid, paymentMethod, additional) VALUES (?)', [insertValues], (error, response) => {
+      if (error) {
+        res.send({ "success": 0, "message": error })
       }
-      else{
-        res.send({"success":1,"bookingid": response.insertId})
+      else {
+        res.send({ "success": 1, "bookingid": response.insertId })
       }
     })
   })
- 
+
 })
 
 
@@ -656,27 +656,27 @@ app.post('/api/user/update', (req, res) => {
   var address = req.body.address
 
   var sql = `UPDATE user SET UserName=?, UserEmail=?, UserAddress=?, UserPhone=? WHERE UserId = ?`
-  var data =[
+  var data = [
     username, email, address, phone, userid
   ]
-  db.query(sql, data, (error, result)=>{
-    if(error)
-      res.send({"success":0,"message":error});
-    else{
-      res.send({"success":1,"message": result})
+  db.query(sql, data, (error, result) => {
+    if (error)
+      res.send({ "success": 0, "message": error });
+    else {
+      res.send({ "success": 1, "message": result })
     }
-    })
+  })
 
 })
 
 app.post('/api/user/booking', (req, res) => {
   var userid = req.body.userid
   var sql = `SELECT * FROM booking WHERE userid=${userid}`;
-  db.query(sql,(error, result)=>{
-    if(error)
-      res.send({"success":0,"message":error})
-    else{
-      res.send({"success":1,"message":result})
+  db.query(sql, (error, result) => {
+    if (error)
+      res.send({ "success": 0, "message": error })
+    else {
+      res.send({ "success": 1, "message": result })
       console.log("New Response", res.data)
       // res.send(result);
     }
@@ -685,31 +685,31 @@ app.post('/api/user/booking', (req, res) => {
 app.post('/api/booking', (req, res) => {
   var userid = req.body.userid
   var sql = `SELECT * FROM booking`;
-  db.query(sql,(error, result)=>{
-    if(error)
-      res.send({"success":0,"message":error})
-    else{
-      res.send({"success":1,"message":result})
+  db.query(sql, (error, result) => {
+    if (error)
+      res.send({ "success": 0, "message": error })
+    else {
+      res.send({ "success": 1, "message": result })
     }
   })
 })
 
-app.post("/api/popularPackages", (req,res)=>{
-  db.query("SELECT * FROM booking", (err, result)=>{
+app.post("/api/popularPackages", (req, res) => {
+  db.query("SELECT * FROM booking", (err, result) => {
     var packageIdArray = [];
-    result.forEach(el=>{
+    result.forEach(el => {
       packageIdArray.push(el.packageId)
     })
-    
+
     var freqPackageId = [];
     function mostFrequent(arr) {
-      return arr.sort((a,b) =>
-            arr.filter(v => v===a).length
-          - arr.filter(v => v===b).length
+      return arr.sort((a, b) =>
+        arr.filter(v => v === a).length
+        - arr.filter(v => v === b).length
       ).pop();
 
     }
-    function removeElementFromArray(arr, val){
+    function removeElementFromArray(arr, val) {
       for (let i = arr.length - 1; i >= 0; i--) {
         if (arr[i] === val) {
           arr.splice(i, 1);
@@ -717,14 +717,14 @@ app.post("/api/popularPackages", (req,res)=>{
       }
       return arr;
     }
-      
-    for(var i = 0; i<3; i++){
+
+    for (var i = 0; i < 3; i++) {
       freqPackageId.push(mostFrequent(packageIdArray))
       packageIdArray = removeElementFromArray(packageIdArray, mostFrequent(packageIdArray))
     }
-   
-    
-    res.send({"success":1,"message":freqPackageId})
+
+
+    res.send({ "success": 1, "message": freqPackageId })
   })
 })
 

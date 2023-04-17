@@ -4,211 +4,119 @@ import Axios from "axios";
 import FormInput from "../../components/FormInput";
 import { useNavigate } from 'react-router-dom';
 import "./signup.css"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function SignUp() {
     const navigate = useNavigate();
 
 
-    // const [signupStatus,setsignupStatus]=useState('');
 
-
-    // const [values, setValues] = useState({
-    //     username: "",
-    //     email: "",
-    //     password: "",
-    //     confirmPassword: "",
-    //     dob: "",
-    //     address: "",
-    //     phone: ""
-    // });
-
-    // const register = () => {
-    //     Axios.post("http://localhost:5000/api/signup", values
-    //     ).then((res) => {
-    //         var result = res.data
-
-    //         if (result.success) {
-    //             // console.log(result.sucess)
-    //             navigate('/home');
-    //         } else {
-    //             setsignupStatus(result.message)
-
-    //             if (result.success) {
-    //                 navigate('/home');
-
-    //             }
-    //         }
-    //     })
-    // }
-
-
-    // const inputs = [
-    //     {
-    //         id: 1,
-    //         name: "username",
-    //         type: "text",
-    //         placeholder: "User Name",
-    //         errorMessage:
-    //             "Username should be 3-16 characters and shouldn't include any special character!",
-    //         label: "User Name",
-    //         pattern: "^[A-Za-z0-9]{3,16}$",
-    //         required: true,
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "email",
-    //         type: "email",
-    //         placeholder: "Email",
-    //         errorMessage: "It should be a valid email address!",
-    //         label: "Email",
-    //         required: true,
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "password",
-    //         type: "password",
-    //         placeholder: "Password",
-    //         errorMessage:
-    //             "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
-    //         label: "Password",
-    //         pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
-    //         required: true,
-    //     },
-    //     {
-    //         id: 4,
-    //         name: "confirmPassword",
-    //         type: "password",
-    //         placeholder: "Confirm Password",
-    //         errorMessage: "Passwords don't match!",
-    //         label: "Confirm Password",
-    //         pattern: values.password,
-    //         required: true,
-    //     },
-    //     {
-    //         id: 5,
-    //         name: "dob",
-    //         type: "date",
-    //         placeholder: "Date of Birth",
-    //         label: "Date of Birth",
-    //     },
-    //     {
-    //         id: 6,
-    //         name: "address",
-    //         type: "text",
-    //         placeholder: "Address",
-    //         errorMessage:
-    //             "Add an address to your account",
-    //         label: "Address",
-    //         required: true,
-    //     },
-    //     {
-    //         id: 7,
-    //         name: "phone",
-    //         type: "text",
-    //         placeholder: "Phone Number",
-    //         errorMessage:
-    //             "Add an address to your account",
-    //         label: "Address",
-    //         required: true,
-    //     }
-    // ];
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    // };
-
-    // const onChange = (e) => {
-    //     setValues({ ...values, [e.target.name]: e.target.value });
-    // };
-
-    // return (
-    //     <div className="app">
-    //         <form onSubmit={handleSubmit}>
-    //             <h1>Register</h1>
-    //             {inputs.map((input) => (
-    //                 <FormInput
-    //                     key={input.id}
-    //                     {...input}
-    //                     value={values[input.name]}
-    //                     onChange={onChange}
-    //                 />
-    //             ))}
-    //             <button onClick={register}>Submit</button>
-
-
-    //             <h4>{signupStatus}</h4>
-
-
-    //         </form>
-    //         <span>{signupStatus}</span>
-    //     </div>
 
     const [username, setUsername] = useState('');
     const [DOB, setDOB] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [conPassword, setConPassword] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
 
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
-  
-    const handleUsername = (e)=>{
+
+    const handleUsername = (e) => {
         setUsername(e.target.value);
         setSubmitted(false);
     }
-    const handleDOB = (e)=>{
+    const handleDOB = (e) => {
         setDOB(e.target.value);
         setSubmitted(false);
     }
-    const handleAddress = (e)=>{
+    const handleAddress = (e) => {
         setAddress(e.target.value);
         setSubmitted(false);
     }
-    const handlePhone = (e)=>{
+    const handlePhone = (e) => {
         setPhone(e.target.value);
         setSubmitted(false);
     }
-    const handleEmail = (e)=>{
+    const handleEmail = (e) => {
         setEmail(e.target.value);
         setSubmitted(false);
     }
-    const handlePassword = (e)=>{
+    const handlePassword = (e) => {
         setPassword(e.target.value);
         setSubmitted(false);
     }
-    const handleSubmit = (e)=>{
+    const handleConPassword = (e) => {
+        setConPassword(e.target.value);
+        setSubmitted(false);
+    }
+    const handleSubmit = (e) => {
         e.preventDefault();
+        const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,8}(\.[a-z]{2,8})?/g;
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+        const phoneRegex = /^98\d{8}$/;
+        const nameRegex = /^[A-Z][a-z]+\s[A-Z][a-z]+$/;
         if (0) {
-          setError(true);
+            setError(true);
         }
         else {
-            var data = {
-                username:username,
-                dob:DOB,
-                address:address,
-                phone:phone,
-                password:password,
-                email:email
+            if (!username && !password && !DOB && !phone && !address && !email&&!conPassword) {
+                toast.error('All feilds are empty!')
+            } else {
+                if (!username || !password || !DOB || !phone || !address || !email|| !conPassword) {
+                    toast.error('Entry every details!')
+                } else {
+                    if (!nameRegex.test(username)) {
+                        toast.error('Invalid Name: ' + username)
+                    } else {
+                        if (!emailRegex.test(email)) {
+                            toast.error('Invalid Email: ' + email)
+                        } else {
+                            if (!phoneRegex.test(phone)) {
+                                toast.error('Invalid phone number!')
+                            } else {
+                                if (!passwordRegex.test(password)) {
+                                    toast.error('Invalid password formate: Eg: Abcd@123')
+                                } else {
+                                    if (password !== conPassword) {
+                                        toast.error('Password did no match!')
+                                    } else {
+                                        var data = {
+                                            username: username,
+                                            dob: DOB,
+                                            address: address,
+                                            phone: phone,
+                                            password: password,
+                                            email: email
+                                        }
+                                        Axios.post("http://localhost:5000/api/signup", data)
+                                            .then((response) => {
+
+                                                setSubmitted(true);
+                                                setError(false);
+                                                var data = response.data
+
+                                                if (data.success === 1) {
+                                                    toast.success(data.message)
+                                                    navigate("/login")
+                                                }
+                                                else {
+                                                    toast.error(data.message)
+                                                    console.log(data)
+                                                }
+
+                                            })
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            Axios.post("http://localhost:5000/api/signup", data)
-                .then((response)=>{
-                
-                    setSubmitted(true);
-                    setError(false);
-                    var data = response.data
-                    
-                    if(data.success==1){
-                        navigate("/login")
-                    }
-                    else{
-                        console.log(data)
-                    }
-                
-                })
-          
         }
     }
-    const handleRedirect =(e)=>{
+    const handleRedirect = (e) => {
         navigate('/login')
     }
     return (
@@ -226,7 +134,7 @@ function SignUp() {
                     <div class="inputFName">
                         <input type="text" class="FirstName" placeholder="Username" required="required" onChange={handleUsername} />
                     </div>
-                    
+
                 </div>
                 <div class="DOBAddress">
                     <div class="DateOfBirth">
@@ -235,9 +143,9 @@ function SignUp() {
                             class="textbox-n"
                             type="date"
                             onfocus="(this.type='date')"
-                            id="date" 
+                            id="date"
                             onChange={handleDOB}
-                            />
+                        />
                     </div>
                     <div class="Address">
                         <input type="text" placeholder="Address" required="required" onChange={handleAddress} />
@@ -246,19 +154,19 @@ function SignUp() {
 
                 <div class="EmailPhone">
                     <div class="inputEmail">
-                        <input type="email" placeholder="Email" required="required" onChange={handleEmail}/>
+                        <input type="email" placeholder="Email" required="required" onChange={handleEmail} />
                     </div>
                     <div class="Phone">
-                        <input class="phone" type="tel" name="phone" placeholder="Phone" onChange={handlePhone}/>
+                        <input class="phone" type="tel" name="phone" placeholder="Phone" onChange={handlePhone} />
                     </div>
                 </div>
 
                 <div class="passGroup">
                     <div class="inputPass">
-                        <input type="password" placeholder="Password" required="required" />
+                        <input type="password" placeholder="Password" required="required" onChange={handlePassword} />
                     </div>
                     <div class="inputConformPass">
-                        <input type="password" placeholder="Conform Password" required="required" onChange={handlePassword}/>
+                        <input type="password" placeholder="Conform Password" required="required" onChange={handleConPassword} />
                     </div>
                 </div>
 
@@ -268,8 +176,9 @@ function SignUp() {
                 <div class="SignInSection">
                     <p>Already Have Account?</p> <a onClick={handleRedirect} className='redirectlink'>Sign in</a>
                 </div>
-               
+
             </div>
+            <ToastContainer />
         </div>
     )
 }
