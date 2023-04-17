@@ -19,7 +19,6 @@ import Addagency from './pages/admin/newagency/Newagency';
 import Agency1 from './pages/admin/agencydetails/Agencydetails';
 import Addpackage from './pages/admin/newpackage/Newpackage';
 import Package1 from './pages/admin/packagedetails/Packagedetails';
-import Book from './pages/book/Book';
 import Booking from './pages/book/Booking';
 import PackageDesc from './pages/package/Packagedesc'
 // import Myprofile from './pages/user/myprofile'
@@ -37,8 +36,7 @@ const App = () => {
         <Route path="/" index element={<Home />} />
         <Route path="home" index element={<Home />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="booking" element={<Book />} />
-        <Route path="booking1" element={<Booking />} />
+        <Route path="booking" element={<Booking />} />
         <Route path="login" element={<Login />} />
 
         <Route path="agency" element={<Agency />} />
