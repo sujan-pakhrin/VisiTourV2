@@ -208,6 +208,9 @@ function SignUp() {
           
         }
     }
+    const handleRedirect =(e)=>{
+        navigate('/login')
+    }
     return (
         <div class="signup-background">
             <div class="signup-all">
@@ -263,11 +266,9 @@ function SignUp() {
                     <button onClick={handleSubmit}>Sign Up</button>
                 </div>
                 <div class="SignInSection">
-                    <p>Already Have Account?</p> <a href="#">Sign in</a>
+                    <p>Already Have Account?</p> <a onClick={handleRedirect} className='redirectlink'>Sign in</a>
                 </div>
-                <div class="rounded-md bg-primary text-white p-3">
-                    This is a rounded element with a primary background color.
-                </div>
+               
             </div>
         </div>
     )

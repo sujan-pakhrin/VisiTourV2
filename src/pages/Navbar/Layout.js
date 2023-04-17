@@ -25,26 +25,16 @@ const Layout = () => {
                 <NavLink className="link" to="/" onClick={handleClick}>Home</NavLink>
               </li>
               <li>
-                <NavLink className="link" to="/" onClick={handleClick}>Package</NavLink>
+                <NavLink className="link" to="/booking" onClick={handleClick}>Package</NavLink>
               </li>
-              <li>
-                <NavLink className="link" to="/" onClick={handleClick} >About</NavLink>
-              </li>
-              <li>
-                <NavLink className="link" to="/" onClick={handleClick} >Contact</NavLink>
-              </li>
-              <li>
-                <NavLink className="link" to="/" onClick={handleClick} >Feedback</NavLink>
-              </li>
+              
               <li>
                 <NavLink className="link" to="/signup" onClick={handleClick} >Sign Up</NavLink>
               </li>
               <li>
                 <NavLink className="link" to="/login" onClick={handleClick} >Login</NavLink>
               </li>
-              <li>
-                <NavLink className="link" to="/booking" onClick={handleClick}>Booking</NavLink>
-              </li>
+              
             </ul>
           </div>
         </div>

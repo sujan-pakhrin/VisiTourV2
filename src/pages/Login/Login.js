@@ -1,22 +1,22 @@
-import './LogIn.css';
 import React, { useState } from 'react'
 import Axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
 import Cookies from 'js-cookie';
 
-const Login = () => {
+import "../Signup/signup.css"
+function SignUp() {
     const navigate = useNavigate();
-    // const [isActive, setIsActive] = useState('');
+
+
     const [email, setUserEmail] = useState('');
     const [password, setUserPassword] = useState('');
-    // const cookies = new CookiesProvider();
-
-    // const [status, setStatus] = useState('');
-
-    // const Signup = () => {
-    //     navigate('/signup')
-    // }
+    const handleEmail = (e)=>{
+        setUserEmail(e.target.value)
+    }
+    const handlePassword = (e)=>{
+        setUserPassword(e.target.value)
+    }
     const handleSubmit = (e) => {
 
 
@@ -50,99 +50,42 @@ const Login = () => {
             }
         })
     }
-
-
+    const handleRedirect =(e)=>{
+        navigate('/signup')
+    }
     return (
-        // <div className="signin-background">
-        //     <div className="all">
-        //         <div className="signIn">
-        //             <p>Sign in</p>
-        //         </div>
-        //         <div className="signInDesc">
-        //             <p>
-        //                 Sign in and start managing your candidates
-        //             </p>
-        //         </div>
-        //         <div className="inputEmail">
-        //             <input
-        //                 type="email"
-        //                 id="email"
-        //                 name="email"
-        //                 value={email}
-        //                 placeholder="Email"
-        //                 required
-        //                 autoComplete='email'
-        //                 onChange={(e) => setUserEmail(e.target.value)}
-        //             />
+        <div class="signup-background">
+            <div class="signup-all">
+                <div class="signUp">
+                    <p>Login</p>
+                </div>
+                <div class="signUpDesc">
+                    <p>
+                        Join The Movement
+                    </p>
+                </div>
+                
+                <div class="EmailPhone">
+                    <div class="inputEmail">
+                        <input type="email" placeholder="Email" required="required" onChange={handleEmail}/>
+                    </div>
+                    <div class="inputPass">
+                        <input type="password" placeholder="Password" required="required" onChange={handlePassword}/>
+                    </div>
+                </div>
 
-        //         </div>
-        //         <div className="inputPass">
-        //             <input
-        //                 type="password"
-        //                 placeholder="Password"
-        //                 required
-        //                 id="password"
-        //                 name="password"
-        //                 value={password}
-        //                 autoComplete="current-password"
-        //                 onChange={(e) => setUserPassword(e.target.value)}
-        //             />
+               
 
-        //         </div>
-        //         <div className="remember">
-        //             <Link to="">Forget Password?</Link>
-        //         </div>
-        //         <div className="SignInBtn">
-        //             <button
-        //                 type="submit"
-        //                 onClick={handleSubmit}
-        //             >Sign in
-        //             </button>
-        //         </div>
-        //         <div className="SignupSection">
-        //             <p>New in VisiTour?</p><Link to="">Create an account</Link>
-        //         </div>
-        //     </div>
-        // </div>
-        <div className="main">
-            <div className="container">
-                <div className="Email">
-                    <input type="text"
-                        placeholder='Email'
-                        className="email-input"
-                        onChange={(e) => {
-                            setUserEmail(e.target.value);
-                        }}
-                    />
+                <div class="SignUpBtn">
+                    <button onClick={handleSubmit}>Login</button>
                 </div>
-                <div className="Password">
-
-                    <input type="password"
-                        placeholder='Password'
-                        className="password-input"
-                        onChange={(e) => {
-                            setUserPassword(e.target.value);
-                        }}
-                    />
+                <div class="SignInSection">
+                    <p>Don't have an account?</p> <a onClick={handleRedirect} className='redirectlink'>Sign Up</a>
                 </div>
-                <div className="LogIn">
-                    <button onClick={handleSubmit}>LogIn</button>
-                </div>
-                <div className="Forget">
-                    <label>Forget Password</label>
-                </div>
-                <div className="Create">
-                    <label className="Create-text">Create new accout?</label>
-                    {/* <button onClick={Signup}>Sign Up</button> */}
-                </div>
-                <div>
-                    {/* <label className='Error-message'>{loginStatus}</label> */}
-                </div>
+               
             </div>
         </div>
-
-
-
     )
 }
-export default Login;
+
+export default SignUp

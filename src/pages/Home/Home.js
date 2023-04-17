@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import Axios from "axios";
+import Layout from "../Navbar/Layout";
 import './Home.css'
 const handle_homePage_featured_input = ()=>{
 
@@ -41,7 +42,6 @@ const Home = () => {
     console.log(popularPackages)
  
   return (
-  
     <div className='homePage_main_div'>
       <div className='homePage_featured_div'>
         <div className='homePage_featured_centerElement'>

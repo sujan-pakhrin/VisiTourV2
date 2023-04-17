@@ -26,13 +26,13 @@ import PackageDesc from './pages/package/Packagedesc'
 import StaffLogin from './pages/Staff/StaffLogin'
 import Staff from './pages/Staff/Staff'
 
-// import Layout from "./pages/Navbar/Layout";
+import Layout from "./pages/Navbar/Layout";
 
 const App = () => {
 
   return (
     <BrowserRouter>
-      {/* <Layout /> */}
+      <Layout />
       <Routes>
         <Route path="/" index element={<Home />} />
         <Route path="home" index element={<Home />} />
